@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>HC Online Judge后台</title>
+    <link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+    <!--css-->
+    <link th:href="@{../css/style.css}" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" th:href="@{../layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{../css/manageu.css}">
+    <!--Apache ECharts-->
+    <script th:src="@{../js/echarts.js}"></script>
+</head>
+<body>
+<div th:replace="~{manage/manageComponent::mangeHead}"></div>
+
+<div class="manage_container">
+    <div th:replace="~{manage/manageComponent::mangeNav}"></div>
+    <div class="manage_body">
+        <div class="manage_top">
+            <div class="col-xs-3 logo" style="border: 0px;float: left;margin: 20px"><img th:src="@{../images/Format Code.png}" name=""><h1 th:text="${'总用户数：'+total.tolUser}">总用户数：4</h1><h1 th:text="${'总题目数：'+total.tolTopic}">总题目数：20</h1></div>
+            <div id="rating" style="width: 500px;height:350px;float: left;margin-top: 50px;"></div>
+            <div id="diff" style="width: 400px;height:250px;float: left;margin-top: 10px;"></div>
+        </div>
+        <div>
+            <div id="result" style="width: 95%;height: 320px;margin: 10px 0;"></div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{component::footer}"></div>
+<script th:src="@{../layui/layui.js}"></script>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+<!--通过率js-->
+<script>
+    var chartDom = document.getElementById('rating');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+        series: [
+            {
+                type: 'gauge',
+                startAngle: 180,
+                endAngle: 0,
+                min: 0,
+                max: 1,
+                splitNumber: 8,
+                axisLine: {
+                    lineStyle: {
+                        width: 6,
+                        color: [
+                            [0.25, '#FF6E76'],
+                            [0.5, '#FDDD60'],
+                            [0.75, '#58D9F9'],
+                            [1, '#7CFFB2']
+                        ]
+                    }
+                },
+                pointer: {
+                    icon: 'path://M12.8,0.7l12,40.1H0.7L12.8,0.7z',
+                    length: '12%',
+                    width: 20,
+                    offsetCenter: [0, '-60%'],
+                    itemStyle: {
+                        color: 'auto'
+                    }
+                },
+                axisTick: {
+                    length: 12,
+                    lineStyle: {
+                        color: 'auto',
+                        width: 2
+                    }
+                },
+                splitLine: {
+                    length: 20,
+                    lineStyle: {
+                        color: 'auto',
+                        width: 5
+                    }
+                },
+                axisLabel: {
+                    color: '#464646',
+                    fontSize: 15,
+                    distance: -60,
+                    formatter: function (value) {
+                        if (value === 0.875) {
+                            return 'A';
+                        } else if (value === 0.625) {
+                            return 'B';
+                        } else if (value === 0.375) {
+                            return 'C';
+                        } else if (value === 0.125) {
+                            return 'D';
+                        }
+                        return '';
+                    }
+                },
+                title: {
+                    offsetCenter: [0, '-20%'],
+                    fontSize: 20
+                },
+                detail: {
+                    fontSize: 30,
+                    offsetCenter: [0, '0%'],
+                    valueAnimation: true,
+                    formatter: function (value) {
+                        return Math.round(value * 100) + '%';
+                    },
+                    color: 'auto'
+                },
+                data: [
+                    {
+                        value: [[${#numbers.formatDecimal(total.tolAc/(total.tolSub*1.0),1,'COMMA',2,'POINT')}]],
+                        name: '总通过率'
+                    }
+                ]
+            }
+        ]
+    };
+
+    option && myChart.setOption(option);
+</script>
+<!--题目难度分布js-->
+<script>
+    var chartDom = document.getElementById('diff');
+    var myChart = echarts.init(chartDom);
+    var option;
+    var tolcount=[[${total.tolTopic}]]/2;
+    var total=new Array();
+    total[0]=[[${total.tolS}]];
+    total[1]=[[${total.tolSs}]];
+    total[2]=[[${total.tolA}]];
+    total[3]=[[${total.tolB}]];
+    total[4]=[[${total.tolC}]];
+    total[5]=[[${total.tolD}]];
+
+    option = {
+        title: {
+            text: '题目难度分布'
+        },
+        legend: {
+            data: ['题目难度']
+        },
+        radar: {
+            // shape: 'circle',
+            indicator: [
+                { name: 'S', max: tolcount },
+                { name: 'SS', max: tolcount },
+                { name: 'A', max: tolcount },
+                { name: 'B', max: tolcount },
+                { name: 'C', max: tolcount },
+                { name: 'D', max: tolcount }
+            ]
+        },
+        series: [
+            {
+                name: '题目难度',
+                type: 'radar',
+                data: [
+                    {
+                        value: total,
+                        name: 'Allocated Budget'
+                    }
+                ]
+            }
+        ]
+    };
+
+    option && myChart.setOption(option);
+</script>
+<!--评测结果统计js-->
+<script>
+    var chartDom = document.getElementById('result');
+    var myChart = echarts.init(chartDom);
+    var option;
+    var total = new Array();
+    total[0]=[[${total.tolAc}]];
+    total[1]=[[${total.tolCe}]];
+    total[2]=[[${total.tolPc}]];
+    total[3]=[[${total.tolWa}]];
+    total[4]=[[${total.tolRe}]];
+    total[5]=[[${total.tolTle}]];
+    total[6]=[[${total.tolMle}]];
+    total[7]=[[${total.tolOle}]];
+    total[8]=[[${total.tolUe}]];
+
+    option = {
+        title: {
+            text: '评测结果数据统计'
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {},
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            boundaryGap: [0, 0.01]
+        },
+        yAxis: {
+            type: 'category',
+            data: [
+                'Accept',
+                'Compile Error',
+                'Partially Correct',
+                'Wrong Answer',
+                'Runtime Error',
+                'Time Limit Exceeded',
+                'Memory Limit Exceeded',
+                'Output Limit Exceeded',
+                'Unknown Error'
+            ]
+        },
+        series: [
+            {
+                name: '评测结果',
+                type: 'bar',
+                data: total
+            }
+        ]
+    };
+
+    option && myChart.setOption(option);
+</script>
+</body>
+</html>

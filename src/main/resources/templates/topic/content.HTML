@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>HC Online Judge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link th:href="@{../css/local.css}" rel='stylesheet' type='text/css' />
+    <link th:href="@{../css/bootstrap.css}" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <link th:href="@{../css/style.css}" rel='stylesheet' type='text/css' />
+    <script th:src="@{../js/simpleCart.min.js}"> </script>
+    <!-- Custom Theme files -->
+    <!--webfont-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" th:src="@{../js/jquery-1.11.1.min.js}"></script>
+    <!-- start menu -->
+    <link th:href="@{../css/megamenu.css}" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" th:src="@{../js/megamenu.js}"></script>
+    <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+    <script th:src="@{../js/topic.js}"> </script>
+    <style>
+        /*文本框显示行号*/
+        #msg1,#msg2,#msg3,#msg4{display:none}
+        #ol{position:absolute;top:17px;left:17px;height:205px;z-index:1;padding:0;margin:0;border:0;background:#ecf0f5;width:23px;text-align:left;resize:none;opacity:0.5;}
+        #li{background:#ecf0f5;height:199px;overflow:hidden;width:32px;border:none;line-height:20px;margin:0;padding-top:13px;text-align:center;resize:none;}
+        .texts{float:left;width:566px;height:200px;line-height:20px;font:18px Courier New,​sans-serif;border:5px solid #f18200;border-radius:2px;resize:none;padding:5px 0 0 45px;margin:12px;overflow:auto;}
+    </style>
+</head>
+<body>
+<div th:replace="~{component::header}"></div>
+<div class="single_top">
+    <div class="container">
+        <div class="box_4">
+            <div class="col-md-8 about_left">
+                <h1 class="header_bottom_border" style="font-size: 1.5em;padding-bottom:10px ;"th:text="${topic.tpcId}+': '+${topic.tpcName}">HC0001:&nbsp;&nbsp;A+B Problem</h1>
+                <div class="topiccontent">
+                    <div class="title_description"><!--题目描述范围-->
+                        <h4 class="header_bottom_border">题目描述</h4>
+                        <p><textarea th:text="${topicContent.tpcDes}"  autoHeight="true" readonly="readonly" disabled></textarea>
+                        </p>
+                    </div>
+
+                    <div class="input_format"><!--输入格式范围-->
+                        <h4 class="header_bottom_border">输入格式</h4>
+                        <p><textarea th:text="${topicContent.tpcIn}"   autoHeight="true" readonly="readonly" disabled></textarea></p>
+                    </div>
+
+                    <div class="onput_format"><!--输出格式范围-->
+                        <h4 class="header_bottom_border">输出格式</h4>
+                        <p><textarea th:text="${topicContent.tpcOut}"  autoHeight="true" readonly="readonly" disabled></textarea></p>
+                    </div>
+                    <div class="exp" th:if="${topicContent.tpcExp!=null&&topicContent.tpcExp!=''}"><!--输出格式范围-->
+                        <h4 class="header_bottom_border">说明</h4>
+                        <p><textarea th:text="${topicContent.tpcExp}"  autoHeight="true" readonly="readonly" disabled></textarea></p>
+                    </div>
+
+                    <div class="input_onput"><!--输入输出样例范围-->
+                        <h4 class="header_bottom_border">输出输入样例</h4>
+                        <table>
+                            <tr><!--需要实现复制功能-->
+                                <td><p>输入#1</p><!--<button onclick="copyText('in1')">复制</button>--></td>
+                                <td><p>输出#1</p><!--<button onclick="copyText('out1')">复制</button>--></td>
+                            </tr>
+                            <tr><!--需要设置文本框跟随内容变化-->
+                                <td><textarea th:text="${topicContent.in1}" class="in" style="resize: none;overflow: hidden" disabled>20 30
+20</textarea></td>
+                                <td><textarea th:text="${topicContent.out1}" class="out" id="in1" style="resize: none;overflow: hidden" disabled>50
+60
+90</textarea></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="subform">
+                    <form action="#" th:action="@{/submissions/subjudge}" method="post" id="form" onsubmit="return codesub()">
+                        选择语言：<select id="lang" name="language">
+                        <option value="1">C</option>
+                        <option value="2">C++</option>
+                        <option value="3">java</option>
+                        </select>
+                        <div style="display: none">
+                            <input type="text" name="username" th:value="${session.USER_SESSION!=null?session.USER_SESSION.userId:''}">
+                            <input type="text" name="cid" th:value="${param.ctsId!=null?param.ctsId:'0'}">
+                            <input type="text" name="pno" th:value="${topic.tpcId}">
+                        </div>
+                        <div class="ac_content">
+                            <div class="ac_layer"><div id="ol">
+                                <textarea id="li" cols="2" rows="10" style="overflow: hidden;resize: none;color: #999999" disabled></textarea>
+                            </div></div>
+                            <textarea id="c2" name="code" onkeyup="keyUp()" onFocus="clearValue('2')" onscroll="G('li').scrollTop = this.scrollTop;" oncontextmenu="return false"></textarea>
+                        </div>
+                        <input class="ac_sub" type="submit" value="提交评测">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 sidebar">
+            <!--begin 如果为比赛题目则给出比赛链接nav-->
+            <div th:if="${param.cts_id!=null}">
+                <div th:replace="~{component::contestsnav}"></div>
+            </div>
+            <!--end 如果为比赛题目则给出比赛链接nav-->
+            <div class="testimonials">
+                <div class="topic_message topiccontent">
+                    <h2>题目信息</h2>
+                    <table>
+                        <tr th:if="${param.cts_id==null}"><td>ID:</td><td th:text="${topic.tpcId}">HC0001</td></tr>
+                        <tr><td>时间限制:</td><td th:text="${topicContent.tpcTl}+'MS'">1000MS</td></tr>
+                        <tr><td>内存限制:</td><td th:text="${topicContent.tpcMl}+'MB'">64MB</td></tr>
+                        <tr th:if="${param.cts_id==null}"><td>难度:</td><td th:text="${topic.tpcDiff}">D</td></tr>
+                        <tr><td>通过率:</td><td th:text="${topic.tpcAc}+'/'+${topic.tpcSub}">75.2%</td></tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<div th:replace="~{component::footer}"></div>
+<script>
+    var inh = $(".in").val().split("\n").length;
+    var outh = $(".out").val().split("\n").length;
+    var inc=document.getElementsByClassName('in');
+    var outc=document.getElementsByClassName('out');
+    var h=Math.max(inh,outh);
+    var i;
+    for (i = 0; i < inc.length; i++) {
+        inc[i].rows = h;
+        outc[i].rows = h;
+    }
+    function codesub() {
+        if([[${session.USER_SESSION==null}]]){
+            alert("请先登录!");
+            return false;
+        }else{
+            return true;
+        }
+    }
+</script>
+</body>
+</html>

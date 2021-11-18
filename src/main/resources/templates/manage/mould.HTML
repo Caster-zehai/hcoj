@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>HC Online Judge后台</title>
+    <link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+    <!--css-->
+    <link th:href="@{../css/style.css}" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" th:href="@{../layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{../css/manageu.css}">
+    <!--Apache ECharts-->
+    <script th:src="@{../js/echarts.js}"></script>
+    <!--iframe高度自适应-->
+    <script type="text/javascript" language="javascript">
+        function iFrameHeight() {
+            var ifm= document.getElementById("J_iframe");
+            var subWeb = window.frames ? window.frames["J_iframe"].document : ifm.contentDocument;
+            if(ifm != null && subWeb != null) {
+                ifm.style.height = 'auto';//关键这一句，先取消掉之前iframe设置的高度
+                var height=subWeb.body.scrollHeight+70;
+                ifm.style.height = height+'px';
+            }
+        };
+    </script>
+</head>
+<body>
+<div th:replace="~{manage/manageComponent::mangeHead}"></div>
+
+<div class="manage_container">
+    <div th:replace="~{manage/manageComponent::mangeNav}"></div>
+    <div class="manage_body" style="overflow: auto">
+        <!--模板内容iframe内容更换-->
+        <!--用户管理页面-->
+        <iframe id="J_iframe" name="J_iframe" th:if="${param.user!=null}" th:src="@{/manage/userlist}" frameborder="0" scrolling="no" width="95%" onLoad="iFrameHeight()"></iframe>
+        <iframe id="J_iframe" name="J_iframe" th:if="${param.useredit!=null}" th:src="@{/manage/useredit}" frameborder="0" scrolling="no" width="95%" onLoad="iFrameHeight()"></iframe>
+        <!--题库管理页面-->
+        <iframe id="J_iframe" name="J_iframe" th:if="${param.topic!=null}" th:src="@{/manage/topiclist}" frameborder="0" scrolling="no" width="95%" onLoad="iFrameHeight()"></iframe>
+        <iframe id="J_iframe" name="J_iframe" th:if="${param.topicadd!=null}" th:src="@{/manage/topicadd}" frameborder="0" scrolling="no" width="95%" onLoad="iFrameHeight()"></iframe>
+        <iframe id="J_iframe" name="J_iframe" th:if="${param.topicedit!=null}" th:src="@{/manage/topicedit}" frameborder="0" scrolling="no" width="95%" onLoad="iFrameHeight()"></iframe>
+        <!--比赛管理页面-->
+        <iframe id="J_iframe" name="J_iframe" th:if="${param.contests!=null}" th:src="@{/manage/contestslist}" frameborder="0" scrolling="no" width="95%" onLoad="iFrameHeight()"></iframe>
+        <iframe id="J_iframe" name="J_iframe" th:if="${param.ctsadd!=null}" th:src="@{/manage/contestsadd}" frameborder="0" scrolling="no" width="95%" onLoad="iFrameHeight()"></iframe>
+        <iframe id="J_iframe" name="J_iframe" th:if="${param.ctscon!=null}" th:src="@{/manage/contestscon}" frameborder="0" scrolling="no" width="95%" height="820px;"></iframe>
+        <iframe id="J_iframe" name="J_iframe" th:if="${param.ctsedit!=null}" th:src="@{/manage/contestsedit}" frameborder="0" scrolling="no" width="95%" onLoad="iFrameHeight()"></iframe>
+    </div>
+</div>
+
+<div th:replace="~{component::footer}"></div>
+<script th:src="@{../layui/layui.js}"></script>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+</body>
+</html>

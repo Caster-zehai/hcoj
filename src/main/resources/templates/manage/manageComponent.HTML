@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+
+<div class="layui-header" th:fragment="mangeHead">
+    <ul class="layui-nav" style="background: #2f659c;border-radius: 0px;">
+        <li class="layui-nav-item">
+            <div class="col-xs-3 logo" style="border: 0px;">
+                <h1 style="font-size: 0.9em;"><a th:href="@{/index}"><span>HC Online</span>&nbsp;&nbsp;Judge后台</a></h1>
+            </div>
+        </li>
+        <li class="layui-nav-item" style="float: right">
+            <a href="" th:if="${session.ADMIN_SESSION==null}" th:href="@{/manage/login}"><!--<img src="//t.cn/RCzsdCq" class="layui-nav-img">-->账户</a>
+            <a href="" th:if="${session.ADMIN_SESSION!=null}" th:text="${session.ADMIN_SESSION.getAdmName()}"><!--<img src="//t.cn/RCzsdCq" class="layui-nav-img">-->账户</a>
+            <dl class="layui-nav-child">
+                <dd><a href="javascript:;" th:href="@{/manage/exitlogin}">退出登录</a></dd>
+            </dl>
+        </li>
+    </ul>
+</div>
+
+
+<div class="manage_left" th:fragment="mangeNav">
+    <ul class="layui-nav layui-nav-tree" lay-filter="test" style="border-radius: 0px;">
+        <!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+        <li class="layui-nav-item"><a th:href="@{/manage/index}">首页</a></li>
+        <li class="layui-nav-item" th:classappend="${param.user!=null||param.useredit!=null}?'layui-nav-itemed':''">
+            <a href="javascript:;">用户管理</a>
+            <dl class="layui-nav-child">
+                <dd th:classappend="${param.user!=null}?'layui-this':''"><a href="javascript:;" th:href="@{/manage/mould(user=1)}">用户列表</a></dd>
+                <dd th:classappend="${param.useredit!=null}?'layui-this':''"><a href="" th:href="@{/manage/mould(useredit=1)}">编辑用户</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item" th:classappend="${param.topic!=null||param.topicadd!=null||param.topicedit!=null}?'layui-nav-itemed':''">
+            <a href="javascript:;">题库管理</a>
+            <dl class="layui-nav-child">
+                <dd th:classappend="${param.topic!=null}?'layui-this':''"><a href="" th:href="@{/manage/mould(topic=1)}">题目列表</a></dd>
+                <dd th:classappend="${param.topicadd!=null}?'layui-this':''"><a href="" th:href="@{/manage/mould(topicadd=1)}">添加题目</a></dd>
+                <dd th:classappend="${param.topicedit!=null}?'layui-this':''"><a href="" th:href="@{/manage/mould(topicedit=1)}">编辑题目</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item" th:classappend="${param.contests!=null||param.ctsadd!=null||param.ctscon!=null||param.ctsedit!=null}?'layui-nav-itemed':''">
+            <a href="javascript:;">比赛管理</a>
+            <dl class="layui-nav-child">
+                <dd th:classappend="${param.contests!=null}?'layui-this':''"><a href=""th:href="@{/manage/mould(contests=1)}">比赛列表</a></dd>
+                <dd th:classappend="${param.ctsadd!=null}?'layui-this':''"><a href="" th:href="@{/manage/mould(ctsadd=1)}">添加比赛</a></dd>
+                <dd th:classappend="${param.ctscon!=null}?'layui-this':''"><a href="" th:href="@{/manage/mould(ctscon=1)}">题目绑定</a></dd>
+                <dd th:classappend="${param.ctsedit!=null}?'layui-this':''"><a href="" th:href="@{/manage/mould(ctsedit=1)}">编辑比赛</a></dd>
+            </dl>
+        </li>
+    </ul>
+</div>
+
+</html>

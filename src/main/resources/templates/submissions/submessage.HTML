@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>HC Online Judge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+    <script type="application/x-javascript">
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link th:href="@{../css/local.css}" rel='stylesheet' type='text/css'/>
+    <link th:href="@{../css/bootstrap.css}" rel='stylesheet' type='text/css'/>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <link th:href="@{../css/style.css}" rel='stylesheet' type='text/css'/>
+    <link th:href="@{../css/status.css}" rel='stylesheet' type='text/css'/>
+    <script th:src="@{../js/simpleCart.min.js}"></script>
+    <!-- Custom Theme files -->
+    <!--webfont-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet'
+          type='text/css'>
+    <script type="text/javascript" th:src="@{../js/jquery-1.11.1.min.js}"></script>
+    <!-- start menu -->
+    <link th:href="@{../css/megamenu.css}" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" th:src="@{../js/megamenu.js}"></script>
+    <script>$(document).ready(function () {
+        $(".megamenu").megamenu();
+    });</script>
+    <style type="text/css">
+        table td textarea{
+            color: #898989;
+            width: 80%;
+            background: transparent;
+            border: 1px solid #898989;
+            border-radius: 3px;
+            resize: none;
+            overflow: hidden
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{component::header}"></div>
+<div class="single_top">
+    <div class="container">
+        <div class="box_4">
+            <div class="col-md-12 about_left">
+                <h1 class="header_bottom_border" style="font-size: 1.5em;padding-bottom:10px ;">提交记录</h1>
+                <div style="width: 100%;float: left;">
+                <div style="width: 50%;float: left;">
+                    <h4>运行状态</h4>
+                    <div class="submess" th:classappend="${status.resClass}">
+                    <div class="subtext">
+                        <p th:text="${status.resC}"></p>
+                        <p style="font-size: 0.5em" th:text="${status.time+'MS/'+status.mem+'MB'}"></p>
+                    </div>
+                    </div>
+                    <p th:text="${'题目名称：'+status.tpcName+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提交用户：'+status.username}"></p>
+                    <p th:text="${'提交时间：'+#dates.format(status.submitDate,'yyyy-MM-dd HH:mm:ss')+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;语言：'+status.langName}"></p>
+                    <p th:text="${'运行时间：'+status.time+'MS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占用内存：'+status.mem+'MB'}"></p>
+                </div>
+                <div style="width: 50%;float: left;">
+                    <h4>测试点</h4>
+                    <table width="100%">
+                        <div th:each="inout:${listinout}">
+                        <tr>
+                            <td><p th:text="${'输入'+inoutStat.count+':'}">输入:</p></td>
+                            <td><p th:text="${'输出'+inoutStat.count+':'}">输出:</p></td>
+                        </tr>
+                        <tr>
+                            <td><textarea th:text="${inout.datain}" disabled></textarea></td>
+                            <td><textarea th:text="${inout.dataout}" disabled></textarea></td>
+                        </tr>
+                        </div>
+                    </table>
+                </div>
+                </div>
+                <div class="subform" style="width: 80%;background: transparent;margin: 0;padding: 0;" >
+                    <p>代码：</p>
+                    <div class="ac_content">
+                        <div class="ac_layer"><div id="ol">
+                            <textarea id="li" cols="2" rows="10" style="overflow: hidden;resize: none;color: #999999" disabled></textarea>
+                        </div></div>
+                        <textarea id="c2" name="code" th:text="${status.code}" onload="loading()" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{component::footer}"></div>
+</body>
+</html>

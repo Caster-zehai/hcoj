@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>HC Online Judge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link th:href="@{../css/local.css}" rel='stylesheet' type='text/css' />
+    <link th:href="@{../css/bootstrap.css}" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <link th:href="@{../css/style.css}" rel='stylesheet' type='text/css' />
+    <script th:src="@{../js/simpleCart.min.js}"> </script>
+    <!-- Custom Theme files -->
+    <!--webfont-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" th:src="@{../js/jquery-1.11.1.min.js}"></script>
+    <!-- start menu -->
+    <link th:href="@{../css/megamenu.css}" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" th:src="@{../js/megamenu.js}"></script>
+    <link th:href="@{../css/manageu.css}" rel="stylesheet" type="text/css"/>
+    <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+    <script>
+        var inout=1;
+        var editTable = {addCol:function(){
+            inout++;
+            if(inout>5){alert("已超过可添加最大样例数");}
+            else{
+            $col = $("<td><p>输入#"+inout+"</p></td><td><p>输出#"+inout+"</p></td>");
+            $co2 = $("<td><textarea name=\"in"+inout+"\"  class=\"in\"></textarea></td><td><textarea name=\"out"+inout+"\" class=\"out\"></textarea></td>");
+            $("#amsTbody #amstr1").append($col);
+            $("#amsTbody #amstr2").append($co2);
+            }
+        }};
+    </script>
+</head>
+<body>
+<div>
+    <div class="container">
+        <div class="register">
+            <form th:action="@{/manage/subtopicadd}" method="post">
+                <h3 style="color: #f54d56">添加题目</h3>
+                <div style="float: left;width: 100%;">
+            <div class="col-md-6 login-right">
+                    <div style="margin: 10px">
+                        <span>题目名称<label>*</label></span>
+                        <input name="tpcName" type="text" autocomplete="off"/>
+                    </div>
+                    <div style="margin: 10px">
+                        <span>内存限制<label>*</label></span>
+                        <input name="tpcMl" type="text" value="64" style="width: 40%;"/>MB
+                    </div>
+                    <div style="margin: 10px">
+                        <span>题目难度<label>*</label></span>
+                        <div class="option">
+                        <select name="tpcDiff">
+                            <option>选择难度</option>
+                            <option value="SS">SS</option>
+                            <option value="S">S</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                        </select>
+                        </div>
+                    </div>
+            </div>
+                <div  class="col-md-6 login-right">
+                    <div style="margin: 10px">
+                        <span>题目标签(选填)<label></label></span>
+                        <input name="tpcLabel" type="text" autocomplete="off">
+                    </div>
+                    <div style="margin: 10px">
+                        <span>时间限制<label>*</label></span>
+                        <input name="tpcTl" type="text" value="1000" style="width: 40%;">MS
+                    </div>
+                    <div style="margin: 10px">
+                        <span>题目状态<label>*</label></span>
+                        <input name="tpcState" type="radio" value="1"/>公开 &nbsp;
+                        <input name="tpcState" type="radio" value="0"/>私有
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-12 login-right">
+                    <div class="topic-add">
+                        <div class="title_description"><!--题目描述范围-->
+                            <h4 class="header_bottom_border">题目描述</h4>
+                            <p><textarea name="tpcDes"></textarea>
+                            </p>
+                        </div>
+
+                        <div class="input_format"><!--输入格式范围-->
+                            <h4 class="header_bottom_border">输入格式</h4>
+                            <p><textarea name="tpcIn" ></textarea></p>
+                        </div>
+
+                        <div class="onput_format"><!--输出格式范围-->
+                            <h4 class="header_bottom_border">输出格式</h4>
+                            <p><textarea name="tpcOut"></textarea></p>
+                        </div>
+                        <div class="exp"><!--输出格式范围-->
+                            <h4 class="header_bottom_border">说明(选填)</h4>
+                            <p><textarea name="tpcExp"></textarea></p>
+                        </div>
+
+                        <div class="input_onput"><!--输入输出样例范围-->
+                            <h4 class="header_bottom_border">输出输入样例<p style="display: inline;margin-left: 10px;font-size: 12px;">输入输出2-5作为隐藏测试点</p></h4>
+                            <table id="amsTbody">
+                                <tr id="amstr1"><!--需要实现复制功能-->
+                                    <td><p>输入#1</p><!--<button onclick="copyText('in1')">复制</button>--></td>
+                                    <td><p>输出#1</p><!--<button onclick="copyText('out1')">复制</button>--></td>
+                                </tr>
+                                <tr id="amstr2"><!--需要设置文本框跟随内容变化-->
+                                    <td><textarea name="in1"  class="in"></textarea></td>
+                                    <td><textarea name="out1" class="out"></textarea></td>
+                                </tr>
+                                <input type="button" class="manage-btn" onclick="editTable.addCol()" value="添加测试点">
+                            </table>
+                        </div>
+                    </div>
+                    <input type="submit" value="添加"/>
+                </div>
+            </form>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

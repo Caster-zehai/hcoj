@@ -1,0 +1,41 @@
+.status span{
+	padding: 1px 4px;
+	border: 1px solid transparent;
+	border-radius: 3px;
+}
+
+.status span a,.status span a:hover{
+	color: #FFFFFF;
+}
+
+.ac{
+	background: #5eb95e;
+}
+
+.ce{
+	background: #f1c40f;
+}
+
+.pc{
+	background: #e67e21;
+}
+
+.wa{
+	background: #e74b3c;
+}
+
+.re{
+	background: #8e43ac;
+}
+
+.le{
+	background: #2e468c;
+}
+
+.uke{
+	background: #33495e;
+}
+
+.st{
+	background: #83fbdf;
+}

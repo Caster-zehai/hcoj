@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>HC Online Judge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+<script type="application/x-javascript">
+    addEventListener("load", function() {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    }
+</script>
+<link th:href="@{../css/local.css}" rel='stylesheet' type='text/css' />
+<link th:href="@{../css/bootstrap.css}" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- Custom Theme files -->
+<link th:href="@{../css/style.css}" rel='stylesheet' type='text/css' />
+<script th:src="@{../js/simpleCart.min.js}"> </script>
+<!-- Custom Theme files -->
+<!--webfont-->
+<link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+<script type="text/javascript" th:src="@{../js/jquery-1.11.1.min.js}"></script>
+<!-- start menu -->
+<link th:href="@{../css/megamenu.css}" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" th:src="@{../js/megamenu.js}"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<!--iframe高度自适应-->
+<script type="text/javascript" language="javascript">
+    function iFrameHeight() {
+        var ifm= document.getElementById("J_iframe");
+        var subWeb = window.frames ? window.frames["J_iframe"].document : ifm.contentDocument;
+        if(ifm != null && subWeb != null) {
+            ifm.style.height = 'auto';//关键这一句，先取消掉之前iframe设置的高度
+            var height=subWeb.body.scrollHeight+38;
+            ifm.style.height = height+'px';
+        }
+    };
+</script>
+</head>
+<body>
+<div th:replace="~{component::header}"></div>
+<div class="single_top">
+    <div class="container">
+        <div class="box_4">
+            <div class="col-md-12 about_left">
+                <h1 class="header_bottom_border" style="font-size: 1.5em;padding-bottom:10px ;">比赛列表</h1>
+                <iframe id="J_iframe" name="J_iframe" th:src="@{/contests/list}" frameborder="0" scrolling="no" width="100%" onLoad="iFrameHeight()"></iframe>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<div th:replace="~{component::footer}"></div>
+</body>
+</html>

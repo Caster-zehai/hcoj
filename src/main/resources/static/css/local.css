@@ -1,0 +1,446 @@
+.am-form-field {
+	padding: .5em;
+	font-size: 1.2rem;
+	line-height: 1.2;
+	color: #555;
+	vertical-align: middle;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+}
+
+.am-btn {
+	display: inline-block;
+	margin-bottom: 0;
+	padding: .5em 1em;
+	font-weight: 400;
+	line-height: 1.2;
+	text-align: center;
+	white-space: nowrap;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 0;
+	cursor: pointer;
+	outline: 0;
+}
+
+.contest{
+	width: 100%;
+	float: left;
+	border-top: 1px solid #999;
+}
+
+.contest .mess{
+	margin-top:10px ;
+	float: left;
+	width: 80%;
+}
+
+.contest .join{
+	text-align:center;
+	color: #999;
+	font-size:0.85em;
+	margin-top: 20px;
+	float: right;
+	width: 20%;
+}
+
+.header_bottom_border{
+	border-bottom: 1px solid #ccc;
+}
+
+.contest_border{
+	border: 1px solid #ccc;
+	padding: 20px;
+}
+
+.topic_list{
+	display: block;
+	margin-bottom: 1.3em;
+	background-color: #fff;
+	box-shadow: 0 1px 3px rgba(26,26,26,.1);
+	box-sizing: border-box;
+}
+
+.topic_list table{
+	width: 100%;
+}
+
+.topic_list_first{
+	padding-bottom: .5em;
+	vertical-align: middle;
+	border-bottom: 2px solid #e8e8e8;
+	height: 30px;
+}
+
+.topic_list_sec{
+	padding-bottom: .5em;
+	vertical-align: middle;
+	border-bottom: 1px solid #e8e8e8;
+	height: 35px;
+}
+
+.topic_list_sec a{
+	color: #f54d56;
+	font-size: 0.9em;
+}
+
+.topic_list_sec a:hover{
+	color: #999;
+	text-decoration: none;
+}
+
+.topic_list_sec .algorithm span{
+	font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+	background-color: #51bffb;
+	color: #FFFFFF;
+	font-size: 0.75em;
+	padding: 2px;
+	margin-right: 5px;
+	border-radius: 2px;
+}
+
+.topic_list_sec .difficulty span{
+	font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+	color: #FFFFFF;
+	font-size: 0.75em;
+	padding: 2px 8px;
+	border-radius: 2px;
+}
+
+.bg_SS{
+	background-color: #f54d56;
+}
+.bg_S{
+	background-color: rgb(250,97,173);
+}
+.bg_A{
+	background-color: rgb(161,120,149);
+}
+.bg_B{
+	background-color:rgb(237,235,80);
+}
+.bg_C{
+	background-color: rgb(106,172,87);
+}
+.bg_D{
+	background-color: rgb(54,149,224);
+}
+
+.topic_list_font{
+	font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+	font-size: 0.875em;
+	line-height: 1.5;
+	color: rgba(0, 0, 0, .75);
+}
+
+.topic_icon{
+	flex: none;
+	width: 1em;
+	text-align: center;
+	padding-right: 0.3em;
+	    overflow: visible;
+	    display: inline-block;
+	    font-size: inherit;
+	    height: 1em;
+	    vertical-align: -0.125em;
+}
+
+.topic_bottom{
+	padding: 0.5em 1em;
+	position: fixed;
+	    bottom: 0;
+	    width: 100%;
+	    max-width: 1168px;
+	    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15), inset 0 0 1px rgba(0, 0, 0, 0.5);
+	    background-color: #fff;
+	    z-index: 99;
+		font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", "Noto Sans", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+		    font-size: 16px;
+		    line-height: 1.5;
+		    color: rgba(0, 0, 0, .75);
+}
+
+.float-bottom,.topic_bottom-inner{
+	justify-content: space-between;
+}
+
+.topic_bottom-inner{
+	align-items: center;
+}
+
+.page-bar{
+	float: right;
+    display: flex;
+    align-items: center;
+}
+
+.page-bar span{
+	text-align: center;
+}
+
+.page-bar .total{
+	margin-right: 20px;
+	font-size: 0.8em;
+}
+
+.number{
+	line-height: 1.2;
+	font-family: inherit;
+	font-size: 100%;
+	margin: 0;
+}
+
+.page-bar button{
+	margin-right: .5em;
+	    padding: 0;
+	    cursor: pointer;
+	    width: 1.7em;
+	    min-width: 1.7em;
+	    height: 1.7em;
+	    background: #fff;
+	    border: 1px solid #bfbfbf;
+	    border-radius: 6px;
+		text-align: center;
+		font-size: 0.8em;
+}
+
+.sidebar h3 span a span{
+	font-size: 1.3em;
+	border: 1px solid cornflowerblue;
+	border-radius: 2px;
+	text-decoration: none;
+	padding: 2px 10px;
+	text-transform: none;
+}
+
+.testimonials table{
+	margin-left: 30px;
+	border-collapse:separate; border-spacing:20px 10px;
+}
+
+.testimonials table td a span{
+	display: block;
+	width: 86px;
+	border: 1px solid cornflowerblue;
+	border-radius: 2px;
+	text-decoration: none;
+	padding: 2px 10px;
+	text-align: center;
+}
+
+.testimonials table td a{
+	    color: #00A1DA;
+	    font-size: 0.9em;
+	    cursor: pointer;
+	    font-weight: normal;
+	    text-transform: lowercase;
+}
+
+.topiccontent{
+	background: #F7F7F7;
+	padding: 20px;
+}
+
+.topiccontent p{
+	color: #898989;
+}
+
+.topiccontent p textarea{
+	width: 95%;
+	resize: none;
+	overflow: hidden;
+	border: 0px;
+	background: transparent;
+	margin-left: 20px;
+}
+
+.topiccontent h4{
+	margin: 20px 0;
+}
+
+.topiccontent span{
+	margin-left: 30px;
+}
+
+.topiccontent table{
+	margin-left: 25px;
+	width: 100%;
+}
+
+.topiccontent table tr{
+	width: 100%;
+}
+
+.topiccontent table td{
+	width: 50%;
+	text-align: left;
+}
+
+.topiccontent table td p{
+	float: left;
+}
+
+.topiccontent table td button{
+	float: right;
+	font-size: 0.5em;
+	margin-right: 70px;
+}
+
+.topiccontent table td textarea{
+	color: #898989;
+	width: 80%;
+	background: transparent;
+	border: 1px solid #898989;
+	border-radius: 3px;
+}
+
+.subform{
+	margin-top: 10px;
+	background: #F7F7F7;
+	padding: 20px;
+}
+
+.subform select{
+	font-size: 0.8em;
+}
+
+.subform .ac_content{
+	margin: 10px 20px;
+	height: 500px;
+}
+
+.subform .ac_layer{
+	/*width: 40px;*/
+	height: 500px;
+	background: #ffbcbf;
+	float: left;
+}
+
+.subform .ac_layer div{
+	height: 22px;
+	padding-top: 2px;
+	padding-left: 19px;
+}
+
+.subform textarea{
+	width: 85%;
+    height: 500px;
+	border-style:none; 
+	resize: none;
+	outline: none;
+	float: left;
+}
+
+.subform .ac_sub{
+	font-size: 0.8em;
+	color: #FFFFFF;
+	padding: 5px 10px;
+	margin-left: 20px;
+    font-size: 0.8em;
+	border-radius: 3px;
+	background: rgb(231, 76, 60);
+	border: 1px solid transparent;
+}
+
+.topic_message{
+	margin-top: 44px;
+	color: #898989;
+	font-size: 0.95em;
+}
+
+.join{
+	text-align: center;
+	color: #999;
+	font-size: 0.85em;
+}
+
+.contest_nav li a{
+	padding-left: 50px;
+	letter-spacing: 8px;
+	border-bottom: 1px solid #ffbcbf;
+}
+
+.contest_nav li a:hover{
+	background: #ffbcbf;
+}
+
+.sub_search{
+	margin: 10px;
+}
+
+.sub_search h4{
+	display: table;
+	float: left;
+}
+
+.sub_search input[type="text"],.sub_search input[type="submit"]{
+    border: 1px solid #DDDBDB;
+    outline-color: #fb4d01;
+    font-size: 0.8125em;
+    padding: 2px;
+}
+
+.sub_search input[type="submit"]:hover{
+    border: 1px solid #f54d56;
+	background-color: #f54d56;
+	color: #FFFFFF;
+}
+
+.topiccontent .overview textarea{
+	width: 100%;
+	border-style:none; 
+	resize: none;
+	outline: none;
+	background: transparent;
+	border: 1px solid transparent;
+	overflow:hidden;
+}
+
+.account{
+	background: url(../images/account_bg.png);
+	height: 180px;
+	color: #FFF0F0;
+}
+
+.account_mes{
+	margin: 0 auto;
+	width: 900px;
+	padding: 45px;
+}
+
+.account_mes img{
+	float: left;
+	width: 90px;
+	height: 90px;
+}
+
+.account_name{
+	float: left;
+	padding: 15px;
+}
+
+.account_tab{
+	float: right;
+	text-align: center;
+}
+
+.account_tab table{
+	border-collapse: separate;
+    border-spacing: 20px 10px;
+}
+
+.submess{
+	position: relative;
+	vertical-align: top;
+	cursor: pointer;
+	margin: 0.2em;
+	height: 6em;
+	width: 6em;
+	padding: 0;
+	color: #fff;
+}
+
+.submess .subtext{
+	padding: 1.5em;
+}

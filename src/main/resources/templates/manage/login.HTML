@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>HC Online Judge后台</title>
+    <link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+    <link th:href="@{../css/style.css}" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" th:href="@{../layui/css/layui.css}">
+</head>
+<body>
+<div th:replace="~{manage/manageComponent::mangeHead}"></div>
+<div class="single_top" style="width: 40%;margin: 30px auto">
+    <div class="container">
+        <div class="register">
+            <div class="col-md-6 login-right">
+                <h3>管理员登录</h3>
+                <p>如果您是管理员，请登录。</p>
+                <form action="/manage/sublogin" method="post">
+                    <div>
+                        <span>账号<label>*</label></span>
+                        <input name="admId" type="text" placeholder="管理员ID" />
+                    </div>
+                    <div>
+                        <span>密码<label>*</label></span>
+                        <input name="admPwd" type="password">
+                    </div>
+                    <input type="submit" value="登录">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{component::footer}"></div>
+<script th:src="@{../layui/layui.js}"></script>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+</script>
+
+</body>
+</html>

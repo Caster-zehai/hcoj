@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>HC Online Judge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link th:href="@{../css/local.css}" rel='stylesheet' type='text/css' />
+    <link th:href="@{../css/bootstrap.css}" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <link th:href="@{../css/style.css}" rel='stylesheet' type='text/css' />
+    <script th:src="@{../js/simpleCart.min.js}"> </script>
+    <!-- Custom Theme files -->
+    <!--webfont-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" th:src="@{../js/jquery-1.11.1.min.js}"></script>
+    <!-- start menu -->
+    <link th:href="@{../css/megamenu.css}" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" th:src="@{../js/megamenu.js}"></script>
+    <link th:href="@{../css/manageu.css}" rel="stylesheet" type="text/css"/>
+    <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+    <script>
+        var inout=1;
+        var editTable = {addCol:function(){
+                inout++;
+                if(inout>10){alert("已超过可添加最大题目数");}
+                else{
+                    $col = $("<tr><td><span>题目"+inout+" :</span><input name=\"tpcId1"+"\" type=\"text\" list=\"topiclist\"  autocomplete=\"off\"/></td></tr>");
+                    $("#amsTbody").append($col);
+                }
+            }};
+    </script>
+</head>
+<body>
+<div>
+    <div class="container">
+        <div class="register">
+            <form th:action="@{/manage/subcontestscon}" method="post">
+                <h3 style="color: #f54d56">题目绑定</h3>
+                <div style="float: left;width: 100%;">
+                    <div class="col-md-6 login-right">
+                        <div style="margin: 10px">
+                            <span>比赛<label>*</label></span>
+                            <input name="ctsId" type="text" list="browsers"  autocomplete="off"/>
+                            <datalist id="browsers">
+                                <option th:if="${lc==null}" >没有未结束的比赛</option>
+                                <option th:if="${lc!=null}" th:each="contests:${lc}" th:text="${contests.ctsId}+'#'+${contests.ctsName}"></option>
+                            </datalist>
+                        </div>
+                        <div style="margin: 10px">
+                            <span>绑定的题目<label>*</label></span>
+                            <table id="amsTbody" style="width: 100%;">
+                                <tr></tr>
+                                <tr><td>
+                                    <span>题目1 :</span><input name="tpcId1" type="text" list="topiclist"  autocomplete="off"/>
+                                </td><td><input type="button" class="manage-btn" onclick="editTable.addCol()" value="+题目数"></td></tr>
+                                <datalist id="topiclist">
+                                    <option th:if="${lt==null}" >没有私有/隐藏的题目</option>
+                                    <option th:if="${lt!=null}" th:each="topic:${lt}" th:text="${topic.tpcId}+'#'+${topic.tpcName}"></option>
+                                </datalist>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 login-right">
+                    <input type="submit" value="绑定"/>
+                </div>
+            </form>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>HC Online Judge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link th:href="@{../css/local.css}" rel='stylesheet' type='text/css' />
+    <link th:href="@{../css/bootstrap.css}" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <link th:href="@{../css/style.css}" rel='stylesheet' type='text/css' />
+    <script th:src="@{../js/simpleCart.min.js}"> </script>
+    <!-- Custom Theme files -->
+    <!--webfont-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" th:src="@{../js/jquery-1.11.1.min.js}"></script>
+    <!-- start menu -->
+    <link th:href="@{../css/megamenu.css}" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" th:src="@{../js/megamenu.js}"></script>
+    <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+</head>
+<body>
+<div th:replace="~{component::header}"></div>
+<div class="account">
+    <div class="account_mes">
+        <img th:src="@{../images/user-img.png}"/>
+        <div class="account_name">
+            <h4 th:text="${session.USER_SESSION.userName}"><!--泽海hihihi--></h4>
+            <p th:text="'ID: '+${session.USER_SESSION.userId}"><!--ID: 100001--></p>
+        </div>
+        <div class="account_tab">
+            <table>
+                <tr>
+                    <td>通过率</td>
+                    <td>提交数</td>
+                    <td>通过数</td>
+                </tr>
+                <tr>
+                    <td th:text="${acsub}+'%'"><!--66.6%--></td>
+                    <td th:text="${session.USER_SESSION.userSubmit}"></td>
+                    <td th:text="${session.USER_SESSION.userAc}"></td>
+                </tr>
+            </table>
+            <a th:href="@{/account/exitlogin}" style="float: right;font-size: 0.8em">退出登录</a>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="container">
+        <div class="footer_top">
+            <div class="account_mes" style="padding: 0;">
+                <h3>参加的比赛</h3>
+                <iframe id="J_iframe" name="J_iframe" src="contestslist.html" frameborder="0" scrolling="no" width="100%" onLoad="iFrameHeight()"></iframe>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div th:replace="~{component::footer}"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>HC Online Judge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link th:href="@{../css/local.css}" rel='stylesheet' type='text/css' />
+    <link th:href="@{../css/bootstrap.css}" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <link th:href="@{../css/style.css}" rel='stylesheet' type='text/css' />
+    <script th:src="@{../js/simpleCart.min.js}"> </script>
+    <!-- Custom Theme files -->
+    <!--webfont-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" th:src="@{../js/jquery-1.11.1.min.js}"></script>
+    <!-- start menu -->
+    <link th:href="@{../css/megamenu.css}" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" th:src="@{../js/megamenu.js}"></script>
+    <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+</head>
+<body>
+<div>
+    <div class="container">
+        <div class="col-xs-3 header-bottom-right" style="float: left;margin: 10px 0;width: 100%">
+            <span>输入需要编辑用户的ID:</span>
+            <form th:action="@{/manage/useredit}">
+                <div class="search">
+                    <input type="text" name="userId" class="textbox" value="用户" th:value="${user!=null}?${user.userId}:''" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '用户';}" autocomplete="off">
+                    <input type="submit" name="submit">
+                    <div id="response"> </div>
+                </div>
+            </form>
+        </div>
+        <div class="register">
+            <form class="formre" th:action="@{/manage/subuseredit}">
+                <div class="register-top-grid">
+                    <h3>个人信息</h3>
+                    <div>
+                        <span>用户名<label>*</label></span>
+                        <input type="text" name="userName" th:value="${user!=null}?${user.userName}:''" autocomplete="off">
+                        <input type="text" name="userId" style="display: none;" th:value="${user!=null}?${user.userId}:''">
+                    </div>
+                    <div>
+                        <span>手机号码<label>*</label></span>
+                        <input type="text" name="userPhone" th:value="${user!=null}?${user.userPhone}:''" autocomplete="off">
+                    </div>
+                    <div>
+                        <span>电子邮箱<label>*</label></span>
+                        <input type="text" name="userEmail" th:value="${user!=null}?${user.userEmail}:''" autocomplete="off">
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <a class="news-letter" href="#" style="visibility: hidden">
+                    <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>注册时事通讯</label>
+                </a>
+                <div class="register-bottom-grid">
+                    <h3>登录信息</h3>
+                    <div>
+                        <span>密码<label>*</label></span>
+                        <input type="text" name="userPwd" th:value="${user!=null}?${user.userPwd}:''" autocomplete="off">
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="clearfix"> </div>
+                <div class="register-but">
+                    <input type="submit" value="保存" id="submit">
+                    <div class="clearfix"> </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

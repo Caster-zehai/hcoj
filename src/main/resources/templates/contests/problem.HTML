@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>HC Online Judge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link th:href="@{../css/local.css}" rel='stylesheet' type='text/css' />
+    <link th:href="@{../css/bootstrap.css}" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <link th:href="@{../css/style.css}" rel='stylesheet' type='text/css' />
+    <script th:src="@{../js/simpleCart.min.js}"> </script>
+    <!-- Custom Theme files -->
+    <!--webfont-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" th:src="@{../js/jquery-1.11.1.min.js}"></script>
+    <!-- start menu -->
+    <link th:href="@{../css/megamenu.css}" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" th:src="@{../js/megamenu.js}"></script>
+    <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+    <!--iframe高度自适应-->
+    <script type="text/javascript" language="javascript">
+        function iFrameHeight() {
+            var ifm= document.getElementById("J_iframe");
+            var subWeb = window.frames ? window.frames["J_iframe"].document : ifm.contentDocument;
+            if(ifm != null && subWeb != null) {
+                ifm.style.height = 'auto';//关键这一句，先取消掉之前iframe设置的高度
+                var height=subWeb.body.scrollHeight+38;
+                ifm.style.height = height+'px';
+            }
+        };
+    </script>
+</head>
+<body>
+<div th:replace="~{component::header}"></div>
+<div class="single_top">
+    <div class="container">
+        <div class="box_4">
+            <div class="col-md-8 about_left">
+                <h1 class="header_bottom_border" style="font-size: 1.5em;padding-bottom:10px ;">题目列表</h1>
+                <div class="topic_list" style="background: #F7F7F7">
+                    <table>
+                        <tr class="topic_list_first topic_list_font">
+                            <td width="5%" align="center">状态</td>
+                            <td width="10%" align="center">题号</td>
+                            <td width="auto">题目名称</td>
+                            <td width="15%" align="center">通过率</td>
+                        </tr>
+                        <!--题目列表begin-->
+                        <tr class="topic_list_sec" th:each="topic,topicStart:${lt}">
+                            <td align="center"><div th:replace="~{topic/topicComponent::nodone}"></div></td>
+                            <td class="topic_list_font" align="center">
+                                <p th:text="${topicStart.count}"></p>
+                            </td>
+                            <td><a th:href="@{/topic/content(tpc_id=${topic.tpcId},cts_id=${param.cts_id})}" th:text="${topic.tpcName}" target="_parent">A+B Problem</a></td>
+                            <td class="topic_list_font" align="center">
+                                <p th:if="${topic.tpcSub==0}">0.00%</p>
+                                <p th:if="${topic.tpcSub!=0}" th:text="${#numbers.formatDecimal(topic.tpcAc/(topic.tpcSub*1.0)*100,1,'COMMA',2,'POINT')}+'%'">75.2%</p>
+                            </td>
+                        </tr>
+                        <!--题目列表end-->
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 sidebar">
+            <div>
+                <div th:replace="~{component::contestsnav}"></div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+</div>
+<div th:replace="~{component::footer}"></div>
+</body>
+</html>

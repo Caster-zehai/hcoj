@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header">
+<div class="header_top">
+    <div class="container">
+        <!--语言选择
+<div class="one-fifth column row_1">
+    <span class="selection-box"><select class="domains valid" name="domains">
+       <option>English</option>
+       <option>French</option>
+       <option>German</option>
+    </select></span>
+ </div>-->
+        <div class="cssmenu">
+            <ul>
+                <!--登录页面跳转-->
+                <li class="active">
+                    <a th:href="@{/account/myaccount}" th:if="${session.USER_SESSION ne null}" th:text="${session.USER_SESSION.userName}">账户</a>
+                    <a th:href="@{/account/myaccount}" th:if="${session.USER_SESSION eq null}">账户</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="wrap-box"></div>
+<div class="header_bottom header_bottom_border">
+    <div class="container">
+        <div class="col-xs-9 header-bottom-left">
+            <div class="col-xs-3 logo">
+                <h1><a th:href="@{/index}"><span>HC Online</span>&nbsp;&nbsp;Judge</a></h1>
+            </div>
+            <div class="col-xs-5 menu">
+                <ul class="megamenu skyblue" style="font-size: 1.1em;">
+                    <li class="grid" th:classappend="${#httpServletRequest.getRequestURL().indexOf('index')!=-1} ? 'active': ''"><a class="color1" th:href="@{/index}">首&nbsp;&nbsp;页</a></li>
+                    <li class="grid" th:classappend="${#httpServletRequest.getRequestURL().indexOf('topic')!=-1 and param.cts_id==null} ? 'active': ''"><a class="color2" th:href="@{/topic/show}">题&nbsp;&nbsp;库</a></li>
+                    <li th:classappend="${#httpServletRequest.getRequestURL().indexOf('contests')!=-1 or param.cts_id!=null} ? 'active': ''"><a class="color4" th:href="@{/contests/show}">比&nbsp;&nbsp;赛</a></li>
+                    <li th:classappend="${#httpServletRequest.getRequestURL().indexOf('submissions')!=-1} ? 'active': ''"><a class="color5" th:href="@{/submissions/show}">提交记录</a></li>
+                    <li th:classappend="${#httpServletRequest.getRequestURL().indexOf('rank')!=-1} ? 'active': ''"><a class="color10" th:href="@{/rank/show}">排行榜</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-3 header-bottom-right">
+            <div class="search">
+                <input type="text" name="s" class="textbox" value="搜索" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '搜索';}">
+                <input type="submit" value="Subscribe" id="submit" name="submit">
+                <div id="response"> </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+</div>
+
+<div th:fragment="footer" class="footer_bottom">
+    <div class="copy">
+        <p>Copyright © 2021 Online_Judge. All Rights Reserved.</a>
+        </p>
+    </div>
+</div>
+
+<div th:fragment="contestsnav" class="testimonials">
+    <div class="topic_message topiccontent">
+        <ul class="nav contest_nav">
+            <li><a th:href="@{/contests/overview(cts_id=${param.cts_id})}">比赛详情</a></li>
+            <li><a th:href="@{/contests/problem(cts_id=${param.cts_id})}">题目</a></li>
+            <li><a href="#">提交记录</a></li>
+            <li><a href="#">排行榜</a></li>
+        </ul>
+    </div>
+</div>
+
+</html>

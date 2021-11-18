@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>HC Online Judge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link th:href="@{../css/local.css}" rel='stylesheet' type='text/css' />
+    <link th:href="@{../css/bootstrap.css}" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <link th:href="@{../css/style.css}" rel='stylesheet' type='text/css' />
+    <script th:src="@{../js/simpleCart.min.js}"> </script>
+    <!-- Custom Theme files -->
+    <!--webfont-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" th:src="@{../js/jquery-1.11.1.min.js}"></script>
+    <!-- start menu -->
+    <link th:href="@{../css/megamenu.css}" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" th:src="@{../js/megamenu.js}"></script>
+    <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+    <!--iframe高度自适应-->
+    <script type="text/javascript" language="javascript">
+        function iFrameHeight() {
+            var ifm= document.getElementById("J_iframe");
+            var subWeb = window.frames ? window.frames["J_iframe"].document : ifm.contentDocument;
+            if(ifm != null && subWeb != null) {
+                ifm.style.height = 'auto';//关键这一句，先取消掉之前iframe设置的高度
+                var height=subWeb.body.scrollHeight+38;
+                ifm.style.height = height+'px';
+            }
+        };
+    </script>
+</head>
+<body>
+<div th:replace="~{component::header}"></div>
+<div class="single_top">
+    <div class="container">
+        <div class="box_4">
+            <div class="col-md-8 about_left">
+                <h1 class="header_bottom_border" style="font-size: 1.5em;padding-bottom:10px ;">题目列表</h1>
+                <iframe id="J_iframe" name="J_iframe" th:src="@{/topic/list}" frameborder="0" scrolling="no" width="100%" onLoad="iFrameHeight()"></iframe>
+            </div>
+        </div>
+        <div class="col-md-4 sidebar">
+            <!--begin 如果为比赛题目则给出比赛链接nav-->
+            <div th:if="${param.contests!=null}">
+                <div th:replace="~{component::contestsnav}"></div>
+            </div>
+            <!--end 如果为比赛题目则给出比赛链接nav-->
+            <div>
+            <h2>分&nbsp;&nbsp;类</h2>
+            <div class="testimonials">
+                <h3>难&nbsp;度<span>
+						<p><span class="quotes"></span><span class="quotes-down">
+							<a href="#"><span>SS</span></a>&nbsp;&nbsp;<a href="#"><span>S</span></a>&nbsp;&nbsp;<a href="#"><span>A</span></a>&nbsp;&nbsp;<a href="#"><span>B</span></a>&nbsp;&nbsp;<a href="#"><span>C</span></a>&nbsp;&nbsp;<a href="#"><span>D</span></a>
+						</span></p></h3>
+            </div>
+            <!--<div class="testimonials">
+                <h3>标&nbsp;签
+						<p><span class="quotes"></span>
+						<span class="quotes-down">
+						</span></p></h3>
+                <table>
+                    <tr><td><a href="#"><span>动态规划</span></a></td><td><a href="#"><span>字符串</span></a></td></tr>
+                    <tr><td><a href="#"><span>模拟</span></a></td><td><a href="#"><span>搜索</span></a></td></tr>
+                </table>
+            </div>-->
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+</div>
+<div th:replace="~{component::footer}"></div>
+</body>
+</html>
