@@ -42,7 +42,10 @@
         </tr>
         <!--题目列表begin-->
         <tr class="topic_list_sec" th:each="topic:${iPage.records}">
-            <td align="center"><div th:replace="~{topic/topicComponent::nodone}"></div></td>
+            <td align="center">
+                <div th:if="${session.USER_SESSION==null ||(session.USER_SESSION!=null && !#strings.containsIgnoreCase(session.USER_SESSION.getUserActopic(),topic.tpcId+','))}" ><div th:replace="~{topic/topicComponent::nodone}"></div></div>
+                <div th:if="${session.USER_SESSION!=null && #strings.containsIgnoreCase(session.USER_SESSION.getUserActopic(),topic.tpcId+',')}"><div th:replace="~{topic/topicComponent::correct}"></div></div>
+            </td>
             <td class="topic_list_font" align="center">
                 <p th:text="${topic.tpcId}">HC0001</p>
             </td>

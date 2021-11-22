@@ -1,5 +1,6 @@
 package com.hcoj.hcoj.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hcoj.hcoj.domain.Status;
@@ -7,6 +8,8 @@ import com.hcoj.hcoj.mapper.StatusMapper;
 import com.hcoj.hcoj.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service("statusService")
@@ -34,5 +37,15 @@ public class StatusServiceImpl implements StatusService {
     public String getLastRunId() {
         String s=String.valueOf(Integer.parseInt(statusMapper.getLastId())+1);
         return s;
+    }
+
+    @Override
+    public List<Status> selectAllNotAdd() {
+        return statusMapper.selectAllNotAdd();
+    }
+
+    @Override
+    public void updateIsadd(String runId) {
+        statusMapper.updateIsadd(runId);
     }
 }

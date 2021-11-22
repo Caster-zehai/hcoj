@@ -9,11 +9,13 @@ import com.hcoj.hcoj.domain.TopicContent;
 import com.hcoj.hcoj.mapper.TopicContentMapper;
 import com.hcoj.hcoj.mapper.TopicMapper;
 import com.hcoj.hcoj.service.TopicService;
+import net.sf.jsqlparser.statement.select.Top;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Random;
 
 
 @Service("topicService")
@@ -39,6 +41,23 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public TopicContent getTopicContentById(String tpc_id) {
         return topicContentMapper.selectById(tpc_id);
+    }
+
+    @Override
+    public String getTopicIdRandom() {
+        String lastId=topicMapper.selectLastId();
+        int b = Integer.parseInt(lastId.substring(2,6));
+        Random random=new Random();
+        b=random.nextInt(b);
+        char[] id={'H','C','0','0','0','0'};
+        int i=5;
+        while(b>0){
+            int x=b%10;
+            id[i]= (char) (x+'0');
+            b=b/10;
+            i--;
+        }
+        return String.valueOf(id);
     }
 
     @Override
@@ -69,6 +88,20 @@ public class TopicServiceImpl implements TopicService {
             return null;
         else
             return lt;
+    }
+
+    @Override
+    public void addTopicSub(String tpcId) {
+        Topic topic=topicMapper.selectById(tpcId);
+        topic.setTpcSub(topic.getTpcSub()+1);
+        topicMapper.updateById(topic);
+    }
+
+    @Override
+    public void addTopicAc(String tpcId) {
+        Topic topic=topicMapper.selectById(tpcId);
+        topic.setTpcAc(topic.getTpcAc()+1);
+        topicMapper.updateById(topic);
     }
 
     @Override

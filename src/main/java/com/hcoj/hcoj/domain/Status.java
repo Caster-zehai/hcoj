@@ -24,7 +24,6 @@ public class Status implements Serializable {
     private int time, mem;
     private int length;
     private String language;
-    private String shared;
     private String code;
     private Date submitDate;
     @TableField(value = "t.tpc_ame")
@@ -35,4 +34,5 @@ public class Status implements Serializable {
     private String resClass;
     @TableField(value = "l.lang_name")
     private String langName;
+    private Integer isadd;
 }

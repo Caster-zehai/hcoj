@@ -8,6 +8,7 @@ import com.hcoj.hcoj.domain.TopicContent;
 import com.hcoj.hcoj.service.InoutService;
 import com.hcoj.hcoj.service.StatusService;
 import com.hcoj.hcoj.service.TopicService;
+import com.hcoj.hcoj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,10 @@ public class SubmissionsController {
     private StatusService statusService;
     @Autowired
     private InoutService inoutService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private TopicService topicService;
 
     @RequestMapping("/show")
     public String show(Model model){
@@ -48,6 +53,9 @@ public class SubmissionsController {
         status.setTime(0);
         status.setMem(0);
         status.setSubmitDate(new Date());
+        status.setIsadd(0);
+        userService.updateUserSub(status.getUsername());
+        topicService.addTopicSub(status.getPno());
         statusService.addSub(status);
         return "redirect:/submissions/seljudge?runId="+status.getRunId();
     }
@@ -56,7 +64,6 @@ public class SubmissionsController {
     public String seljudge(Model model,String runId){
         Status status =statusService.getMessageById(runId);
         List<Inout> listinout=inoutService.selectInoutById(status.getPno());
-        for(Inout inout:listinout) System.out.println("inout: [" +inout + "], runId = [" + runId + "]");
         model.addAttribute("listinout",listinout);
         model.addAttribute("status",status);
         return "submissions/submessage";

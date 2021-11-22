@@ -56,7 +56,36 @@
         </div>
     </div>
 </div>
+
 <div class="footer">
+    <div class="container">
+        <div class="footer_top">
+            <div class="register">
+                <div class="register-top-grid">
+                    <h3>个人信息</h3>
+                    <div>
+                        <span>用户名<label>*</label></span>
+                        <input type="text" name="userName" th:value="${session.USER_SESSION.userName}" autocomplete="off" disabled>
+                        <input type="text" name="userId" style="display: none;" th:value="${session.USER_SESSION.userId}">
+                    </div>
+                    <div>
+                        <span>手机号码<label>*</label></span>
+                        <input type="text" name="userPhone" th:value="${session.USER_SESSION.userPhone}" autocomplete="off" disabled>
+                    </div>
+                    <div>
+                        <span>电子邮箱<label>*</label></span>
+                        <input type="text" name="userEmail" th:value="${session.USER_SESSION.userEmail}" autocomplete="off" disabled>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <a class="news-letter" href="#" style="visibility: hidden">
+                    <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>注册时事通讯</label>
+                </a>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!--
     <div class="container">
         <div class="footer_top">
             <div class="account_mes" style="padding: 0;">
@@ -64,7 +93,7 @@
                 <iframe id="J_iframe" name="J_iframe" src="contestslist.html" frameborder="0" scrolling="no" width="100%" onLoad="iFrameHeight()"></iframe>
             </div>
             <div class="clearfix"> </div>
-        </div>
+        </div>-->
         <div th:replace="~{component::footer}"></div>
     </div>
 </div>

@@ -47,46 +47,35 @@
         <div class="footer_top">
             <div class="col-md-4 box_3">
                 <h3>问题跳转</h3>
+                <form th:action="@{/topic/content}">
                 <div class="am-input-group am-input-group-primary am-input-group-sm">
-                    <input type="text" class="am-form-field" placeholder="例：P1001，可跳至A+B" name="toproblem">
+                    <input type="text" class="am-form-field" placeholder="例：HC0001，可跳至A+B" name="tpc_id">
                 </div>
                 <p style="margin-top:10px;">
-                    <button class="am-btn btn-primary" name="goto">跳转</button>
-                    <button class="am-btn btn-primary" name="gotorandom">随机跳题</button>
+                    <input type="submit" class="am-btn btn-primary" name="goto" value="跳转">
+                    <input type="button" class="am-btn btn-primary" name="gotorandom" th:onclick="javascript:window.location.href='/topic/random'" value="随机跳题">
                 </p>
+                </form>
             </div>
             <div class="col-md-8 box_3 contest_border">
                 <h3>近期比赛</h3>
-                <div class="contest">
+                <div class="contest" th:each="contests:${iPage.records}">
                     <div class="mess">
-                        <h4><a href="#">2021暑期多校训练营1 </a></h4>
-                        <p>报名时间：2021-04-29 10:00 至 2021-07-24 17:00<br />比赛时间：2021-07-24 12:00 至 2021-07-24 17:00 (时长:5小时)</p>
+                        <h4><a href="#" th:href="@{/contests/overview(cts_id=${contests.ctsId})}" th:text="${contests.ctsName}"  target="_blank">2021暑期多校训练营1 </a></h4>
+                        <p style="margin: 0" th:text="'报名时间：'+${#dates.format(contests.enrollBegin,'yyyy-MM-dd HH:mm:ss')}+' 至 '+${#dates.format(contests.enrollEnd,'yyyy-MM-dd HH:mm:ss')}">报名时间：2021-04-29 10:00 至 2021-07-24 17:00 </p>
+                        <p style="margin: 0" th:text="'比赛时间：'+${#dates.format(contests.ctsBegin,'yyyy-MM-dd HH:mm:ss')}+' 至 '+${#dates.format(contests.ctsEnd,'yyyy-MM-dd HH:mm:ss')}">比赛时间：2021-07-24 12:00 至 2021-07-24 17:00 </p>
                     </div>
                     <div class="join">
-                        <a href="#" class="btn btn-primary">报名</a>
-                        <div class="platform-countdown js-countdown">距比赛 3天18:05:13</div>
+                        <a href="#" class="btn btn-primary" th:style="${contests.ctsState==0 or contests.ctsState==4}?'cursor: default;':''">
+                            <p style="margin: 0" th:if="${contests.ctsState==0}">未开始</p>
+                            <p style="margin: 0" th:if="${contests.ctsState==1}">报名中</p>
+                            <p style="margin: 0" th:if="${contests.ctsState==2}">报名结束</p>
+                            <p style="margin: 0" th:if="${contests.ctsState==3}">比赛中</p>
+                            <p style="margin: 0" th:if="${contests.ctsState==4}">已结束</p>
+                        </a>
                     </div>
                 </div>
-                <div class="contest">
-                    <div class="mess">
-                        <h4><a href="#">2021暑期多校训练营1 </a></h4>
-                        <p>报名时间：2021-04-29 10:00 至 2021-07-24 17:00<br />比赛时间：2021-07-24 12:00 至 2021-07-24 17:00 (时长:5小时)</p>
-                    </div>
-                    <div class="join">
-                        <a href="#" class="btn btn-primary">报名</a>
-                        <div class="platform-countdown js-countdown">距比赛 3天18:05:13</div>
-                    </div>
-                </div>
-                <div class="contest">
-                    <div class="mess">
-                        <h4><a href="#">2021暑期多校训练营1 </a></h4>
-                        <p>报名时间：2021-04-29 10:00 至 2021-07-24 17:00<br />比赛时间：2021-07-24 12:00 至 2021-07-24 17:00 (时长:5小时)</p>
-                    </div>
-                    <div class="join">
-                        <a href="#" class="btn btn-primary">报名</a>
-                        <div class="platform-countdown js-countdown">距比赛 3天18:05:13</div>
-                    </div>
-                </div>
+
             </div>
             <div class="clearfix"> </div>
         </div>

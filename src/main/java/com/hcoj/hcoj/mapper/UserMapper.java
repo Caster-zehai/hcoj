@@ -22,7 +22,7 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select * from user where user_phone = #{user_phone}")
     public User findUserByPhone(String user_phone);
 
-    @Insert("insert into user(user_id,user_pwd,user_name,user_phone,user_email,user_ac,user_submit) values( #{user_id},#{user_pwd},#{user_name},#{user_phone},#{user_email},0,0)")
+    @Insert("insert into user(user_id,user_pwd,user_name,user_phone,user_email,user_ac,user_submit,user_watopic,user_actopic) values( #{user_id},#{user_pwd},#{user_name},#{user_phone},#{user_email},0,0,' ',' ')")
     public int registerUser(String user_id,String user_pwd,String user_name,String user_phone,String user_email);
 
     @Select("select user_id from user order by user_id desc limit 1")

@@ -15,6 +15,8 @@ public interface TopicService {
     public IPage<Topic> SelectPageAllTopic(Page<Topic> page);
     //根据id获取题目具体信息
     public TopicContent getTopicContentById(String tpc_id);
+    //随机获取题目id
+    public String getTopicIdRandom();
     //根据id获取题目信息
     public Topic getTopicById(String tpc_id);
     //根据比赛id获取题目信息
@@ -23,6 +25,10 @@ public interface TopicService {
     public void delTopicCts(List<Topic> lt);
     //获取未公开且未绑定比赛的题目信息
     public List<Topic> SelectTopicNoOpen();
+    //添加题目提交数
+    public void addTopicSub(String tpcId);
+    //添加题目Ac数
+    public void addTopicAc(String tpcId);
     //为题目绑定比赛
     public boolean conTopicCts(String[] tpcIds,Integer ctsId);
     //添加题目

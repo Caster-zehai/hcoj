@@ -74,8 +74,8 @@
                             <td><p th:text="${'输出'+inoutStat.count+':'}">输出:</p></td>
                         </tr>
                         <tr>
-                            <td><textarea th:text="${inout.datain}" disabled></textarea></td>
-                            <td><textarea th:text="${inout.dataout}" disabled></textarea></td>
+                            <td><textarea th:text="${inout.datain}"style="overflow-y:visible" readonly></textarea></td>
+                            <td><textarea th:text="${inout.dataout}"style="overflow-y:visible" readonly></textarea></td>
                         </tr>
                         </div>
                     </table>

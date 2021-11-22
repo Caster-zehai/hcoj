@@ -46,7 +46,7 @@
 <div class="single_top">
     <div class="container">
         <div class="box_4">
-            <div class="col-md-8 about_left">
+            <div class="about_left" th:classappend="${param.contests!=null?'col-md-8':'col-md-12'}">
                 <h1 class="header_bottom_border" style="font-size: 1.5em;padding-bottom:10px ;">题目列表</h1>
                 <iframe id="J_iframe" name="J_iframe" th:src="@{/topic/list}" frameborder="0" scrolling="no" width="100%" onLoad="iFrameHeight()"></iframe>
             </div>
@@ -58,13 +58,14 @@
             </div>
             <!--end 如果为比赛题目则给出比赛链接nav-->
             <div>
+                <div style="display: none;">
             <h2>分&nbsp;&nbsp;类</h2>
             <div class="testimonials">
                 <h3>难&nbsp;度<span>
 						<p><span class="quotes"></span><span class="quotes-down">
 							<a href="#"><span>SS</span></a>&nbsp;&nbsp;<a href="#"><span>S</span></a>&nbsp;&nbsp;<a href="#"><span>A</span></a>&nbsp;&nbsp;<a href="#"><span>B</span></a>&nbsp;&nbsp;<a href="#"><span>C</span></a>&nbsp;&nbsp;<a href="#"><span>D</span></a>
 						</span></p></h3>
-            </div>
+            </div></div>
             <!--<div class="testimonials">
                 <h3>标&nbsp;签
 						<p><span class="quotes"></span>

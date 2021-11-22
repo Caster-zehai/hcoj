@@ -19,4 +19,8 @@ public interface UserService {
     public User selectUserById(String userId);
     //编辑/更改用户信息
     public boolean updateUser(User user);
+    //用户提交代码，更新用户提交数
+    public boolean updateUserSub(String userId);
+    //用户提交代码ac，更新用户ac数
+    public boolean updateUserAc(String userId,String tpcId);
 }

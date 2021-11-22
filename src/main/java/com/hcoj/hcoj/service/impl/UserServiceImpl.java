@@ -74,5 +74,32 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    public boolean updateUserSub(String userId) {
+        try {
+            User user=userMapper.selectById(userId);
+            user.setUserSubmit(user.getUserSubmit()+1);
+            userMapper.updateById(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateUserAc(String userId,String tpcId) {
+        try {
+            User user=userMapper.selectById(userId);
+            user.setUserAc(user.getUserSubmit()+1);
+            user.setUserActopic(user.getUserActopic()+tpcId+",");
+            userMapper.updateById(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
 
 }

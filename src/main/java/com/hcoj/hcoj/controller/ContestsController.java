@@ -37,8 +37,6 @@ public class ContestsController {
         if(iPage.getRecords().size()!=0){
             model.addAttribute("iPage",iPage);
         }
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        model.addAttribute("dateFormat",dateFormat);
         return "contests/list";
     }
 

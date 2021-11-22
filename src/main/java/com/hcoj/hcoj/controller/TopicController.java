@@ -43,4 +43,14 @@ public class TopicController {
         model.addAttribute("topic",topic);
         return "topic/content";
     }
+
+    @RequestMapping("/random")
+    public String random(Model model){
+        String tpcId=topicService.getTopicIdRandom();
+        TopicContent topicContent=topicService.getTopicContentById(tpcId);
+        Topic topic=topicService.getTopicById(tpcId);
+        model.addAttribute("topicContent",topicContent);
+        model.addAttribute("topic",topic);
+        return "topic/content";
+    }
 }
