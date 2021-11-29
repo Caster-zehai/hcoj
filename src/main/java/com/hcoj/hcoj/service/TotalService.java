@@ -18,4 +18,13 @@ public interface TotalService {
     //题目删除更新题目数及难度数
     public void topicTotalDel(String tpcDiff);
 
+    //更新提交数+1
+    public void updatesub();
+
+    //更新通过数+1
+    public void updateac();
+
+    //更新结果数据
+    public void updateresult(Integer result);
+
 }

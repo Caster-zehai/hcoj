@@ -8,7 +8,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@TableName("Contests")
+@TableName("contests")
 public class Contests {
     @TableId(value = "cts_id",type = IdType.AUTO)
     private Integer ctsId;

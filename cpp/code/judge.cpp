@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-	//freopen("debug.dat", "w", stdout);
+	freopen("debug.dat", "w", stdout);
 
 	hostname = argv[5];
 	username = argv[6];
@@ -203,12 +203,6 @@ void updateSubmitStatus(const char* runId, int result, const char* ceInfo) {
 
 		ps->setInt(1,result);
 		ps->setString(2,runId);
-		if (nullptr == ceInfo) {
-			const char* tmp = "";
-			ps->setString(3,tmp);
-		} else {
-			ps->setString(3, ceInfo);
-		}
 		ps->execute();
 
 		delete ps;
@@ -352,6 +346,7 @@ int checkResult(std::string dataOut, const char* userOutFileName) {
 	std::ifstream fin(userOutFileName);
 	std::string line;
 	std::string userOut = "";
+	dataOut += "\n";
 
 	while (getline(fin,line)) {
 		userOut += line+"\n";
@@ -467,7 +462,7 @@ void watchRunningStatus(pid_t pidRun, const char* errFile, int lang, int& result
 
 		if (WIFEXITED(status)) break;
 		if (getFileSize(errFile)!=0) {
-//			std::cout << "RE in line " << __LINE__ << "\n";
+			std::cout << "RE in line " << __LINE__ << "\n";
 
 			if (result == OJ_AC) result = OJ_RE;
 			ptrace(PTRACE_KILL, pidRun, nullptr, nullptr);
@@ -482,7 +477,7 @@ void watchRunningStatus(pid_t pidRun, const char* errFile, int lang, int& result
 
 		exitCode = WEXITSTATUS(status);
 		if ( !((lang==3 && exitCode==17) || exitCode==0 || exitCode==133 || exitCode==5) ) {
-//			std::cout << "error in line " << __LINE__ << ", exitCode is " << exitCode << "\n";
+			std::cout << "error in line " << __LINE__ << ", exitCode is " << exitCode << "\n";
 
 			if (result == OJ_AC) {
 				switch (exitCode) {
@@ -507,7 +502,7 @@ void watchRunningStatus(pid_t pidRun, const char* errFile, int lang, int& result
 		if (WIFSIGNALED(status)) {
 			sig = WTERMSIG(status);
 
-//			std::cout << "error in line " << __LINE__ << ", signal is " << sig << "\n";
+			std::cout << "error in line " << __LINE__ << ", signal is " << sig << "\n";
 
 			if (result == OJ_AC) {
 				switch (sig) {
@@ -530,14 +525,14 @@ void watchRunningStatus(pid_t pidRun, const char* errFile, int lang, int& result
 		}
 
 		// check invalid system call, x64 is ORIG_RAX*8, x86 is ORIG_EAX*4
-		int sysCall = ptrace(PTRACE_PEEKUSER, pidRun, ORIG_RAX<<3, nullptr);
+		/*int sysCall = ptrace(PTRACE_PEEKUSER, pidRun, ORIG_RAX*8, nullptr);
 		if (!allowSysCall[sysCall]) {
-//			std::cout << "error in line " << __LINE__ << ", system call id is " << sysCall << "\n";
+			std::cout<<"pidRun:"<<pidRun << " error in line " << __LINE__ << ", system call id is " << sysCall << "\n";
 
 			result = OJ_RE;
 			ptrace(PTRACE_KILL, pidRun, nullptr, nullptr);
 			break;
-		}
+		}*/
 
 		ptrace(PTRACE_SYSCALL, pidRun, nullptr, nullptr);
 	}
@@ -559,7 +554,7 @@ int getProcStatus(int pid, const char* statusTitle) {// get memory info from /pr
 
 	int status = 0;// the unit of status is KB
 	while (getline(fin, line)) {
-//		std::cout << line << "\n";
+		std::cout << line << "\n";
 
 		int lLen = line.length();
 		if (lLen <= sLen) continue;
@@ -583,7 +578,7 @@ int getProcStatus(int pid, const char* statusTitle) {// get memory info from /pr
 		}
 	}
 
-//	std::cout << "\n";
+	std::cout << "\n";
 
 	return status;
 }

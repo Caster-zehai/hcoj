@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
     public boolean updateUserAc(String userId,String tpcId) {
         try {
             User user=userMapper.selectById(userId);
-            user.setUserAc(user.getUserSubmit()+1);
+            user.setUserAc(user.getUserAc()+1);
             user.setUserActopic(user.getUserActopic()+tpcId+",");
             userMapper.updateById(user);
         }catch (Exception e){

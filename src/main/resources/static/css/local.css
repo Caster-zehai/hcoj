@@ -442,5 +442,6 @@
 }
 
 .submess .subtext{
-	padding: 1.5em;
+	text-align: center;
+	padding: 1.5em 0.5em;
 }

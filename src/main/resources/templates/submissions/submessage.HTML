@@ -57,8 +57,8 @@
                     <h4>运行状态</h4>
                     <div class="submess" th:classappend="${status.resClass}">
                     <div class="subtext">
-                        <p th:text="${status.resC}"></p>
-                        <p style="font-size: 0.5em" th:text="${status.time+'MS/'+status.mem+'MB'}"></p>
+                        <p style="color: #ffffff" th:text="${status.resC}"></p>
+                        <p style="font-size: 0.5em;color: #ffffff" th:text="${status.time+'MS/'+status.mem+'MB'}"></p>
                     </div>
                     </div>
                     <p th:text="${'题目名称：'+status.tpcName+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提交用户：'+status.username}"></p>

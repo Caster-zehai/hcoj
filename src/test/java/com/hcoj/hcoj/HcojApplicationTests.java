@@ -23,22 +23,4 @@ import java.util.List;
 @SpringBootTest
 class HcojApplicationTests {
 
-    @Autowired
-    private StatusService statusService;
-    @Autowired
-    private MessageSender messageSender;
-    @Test
-    void contextLoads() {
-
-    }
-
-    @Test
-    void sendRedisMsg() {
-        Page<Status> page=new Page<>(1,10);
-        IPage<Status> iPage=statusService.SelectPageStatus(page,0);
-        for(Status status:iPage.getRecords()){
-            messageSender.sendMessage(status);
-        }
-        System.out.println("The message of Redis sent successfully");
-    }
 }

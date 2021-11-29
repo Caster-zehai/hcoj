@@ -31,5 +31,8 @@ function resubmit(formre) {
     if(bool){
         alert("内容不能为空，请检查并填写！");
         return false;
-    }else return true;
+    }else if(phone.length!=11){
+        alert("请输入11位手机号码！");
+        return false;
+    } else return true;
 }

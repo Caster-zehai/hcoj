@@ -3,6 +3,7 @@ package com.hcoj.hcoj.config;
 import com.hcoj.hcoj.domain.Status;
 import com.hcoj.hcoj.service.StatusService;
 import com.hcoj.hcoj.service.TopicService;
+import com.hcoj.hcoj.service.TotalService;
 import com.hcoj.hcoj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,8 @@ public class UserTask {
     private UserService userService;
     @Autowired
     private TopicService topicService;
+    @Autowired
+    private TotalService totalService;
 
     @Scheduled(cron = "0 */1 * * * ?")
     private void addAcTopic(){
@@ -34,8 +37,10 @@ public class UserTask {
                 if(status.getResult()==1) {
                     userService.updateUserAc(status.getUsername(), status.getPno());
                     topicService.addTopicAc(status.getPno());
+                    totalService.updateac();
                 }
                 statusService.updateIsadd(status.getRunId());
+                totalService.updateresult(status.getResult());
             }
         }
     }

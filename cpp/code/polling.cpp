@@ -96,9 +96,9 @@ int main(int argc, char* argv[]){
 
 				pid_t pid = fork();
 				if (0==pid) {// child
-					std::cout<<"in judge:"<<argv[6]<<"\n";
+					std::cout<<"in judge:"<<argv[5]<<"\n";
 					// use judge_shell to judge this submission
-					execl(argv[5],argv[6],(char*)s.runId.c_str(),(char*)s.cid.c_str()
+					execl("/bin/sh","sh",argv[5],"/judge/workdir",(char*)s.runId.c_str(),(char*)s.cid.c_str()
 						,(char*)s.pno.c_str(),(char*)s.lang.c_str()
 						,argv[1],argv[2],argv[3],argv[4],nullptr);
 					exit(0);
@@ -131,6 +131,7 @@ bool writeCodeIntoFile(const char* workdir, int lang, const char* code){
 
 	char wd[1024];
 	sprintf(wd,"%s/%s",workdir,CODE_FILE[lang]);
+	std::cout<<"write file:"<<workdir<<CODE_FILE[lang]<<"\n";
 
 	std::ofstream fout(wd);
 	fout << code;

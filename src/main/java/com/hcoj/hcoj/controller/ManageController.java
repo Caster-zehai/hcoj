@@ -275,7 +275,7 @@ public class ManageController {
         List<Topic> lt=topicService.SelectTopicNoOpen();
         model.addAttribute("lc",lc);
         model.addAttribute("lt",lt);
-        return "manage/contests/contestscon";
+        return "manage/contests/contestsCon";
     }
 
     //提交题目绑定

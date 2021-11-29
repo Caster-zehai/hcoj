@@ -16,7 +16,7 @@ import java.util.List;
 public interface StatusMapper extends BaseMapper<Status> {
     @Select("select s.*,t.tpc_name,r.res_c,r.res_class,l.lang_name from `status` s left join topic t on s.pno=t.tpc_id left join result r on s.result=r.res_id left join languages l on s.`language`=l.lang_id where s.cid=#{cid} order by s.submit_date desc")
     IPage<Status> selectPageVo(Page<Status> page,Integer cid);
-    @Select("select run_id from `status` ORDER BY run_id desc limit 1")
+    @Select("select run_id from `status` ORDER BY submit_date desc limit 1")
     String getLastId();
     @Select("select s.*,t.tpc_name,r.res_c,r.res_class,l.lang_name from `status` s left join topic t on s.pno=t.tpc_id left join result r on s.result=r.res_id left join languages l on s.`language`=l.lang_id where s.run_id=#{runId}")
     Status selectById(String runId);

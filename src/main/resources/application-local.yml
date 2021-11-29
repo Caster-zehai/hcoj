@@ -6,7 +6,7 @@ server:
 spring:
   datasource:
     #    数据库连接
-    name: ssm_demo_redis
+    name: hcoj
     url: jdbc:mysql:///hcoj
     username: root
     password: root

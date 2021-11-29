@@ -85,5 +85,36 @@ public class TotalServiceImpl implements TotalService {
         totalMapper.updateById(total);
     }
 
+    @Override
+    public void updatesub() {
+        Total total=totalMapper.selectById(1);
+        total.setTolSub(total.getTolSub()+1);
+        totalMapper.updateById(total);
+    }
+
+    @Override
+    public void updateac() {
+        Total total=totalMapper.selectById(1);
+        total.setTolAc(total.getTolAc()+1);
+        totalMapper.updateById(total);
+    }
+
+    @Override
+    public void updateresult(Integer result) {
+        Total total=totalMapper.selectById(1);
+        switch (result){
+            case 2:total.setTolWa(total.getTolWa()+1);break;
+            case 3:total.setTolTle(total.getTolTle()+1);break;
+            case 4:total.setTolMle(total.getTolMle()+1);break;
+            case 5:total.setTolRe(total.getTolRe()+1);break;
+            case 6:total.setTolOle(total.getTolOle()+1);break;
+            case 7:total.setTolCe(total.getTolCe()+1);break;
+            case 8:total.setTolPc(total.getTolPc()+1);break;
+            case 9:total.setTolUe(total.getTolUe()+1);break;
+        }
+
+        totalMapper.updateById(total);
+    }
+
 
 }

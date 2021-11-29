@@ -5,10 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hcoj.hcoj.domain.Inout;
 import com.hcoj.hcoj.domain.Status;
 import com.hcoj.hcoj.domain.TopicContent;
-import com.hcoj.hcoj.service.InoutService;
-import com.hcoj.hcoj.service.StatusService;
-import com.hcoj.hcoj.service.TopicService;
-import com.hcoj.hcoj.service.UserService;
+import com.hcoj.hcoj.domain.User;
+import com.hcoj.hcoj.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +29,8 @@ public class SubmissionsController {
     private UserService userService;
     @Autowired
     private TopicService topicService;
+    @Autowired
+    private TotalService totalService;
 
     @RequestMapping("/show")
     public String show(Model model){
@@ -57,11 +58,12 @@ public class SubmissionsController {
         userService.updateUserSub(status.getUsername());
         topicService.addTopicSub(status.getPno());
         statusService.addSub(status);
+        totalService.updatesub();
         return "redirect:/submissions/seljudge?runId="+status.getRunId();
     }
 
     @RequestMapping("/seljudge")
-    public String seljudge(Model model,String runId){
+    public String seljudge(Model model, String runId, HttpSession session){
         Status status =statusService.getMessageById(runId);
         List<Inout> listinout=inoutService.selectInoutById(status.getPno());
         model.addAttribute("listinout",listinout);
