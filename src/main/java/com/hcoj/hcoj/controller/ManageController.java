@@ -205,17 +205,31 @@ public class ManageController {
             totalService.topicTotalAdd(topic.getTpcDiff());
             //更新输入输出表内容
             List<Inout> list=new ArrayList<Inout>();
-            Inout inout=new Inout();
-            if(topicContent.getOut1()!=null){inout.setTpcId(topicContent.getTpcId());inout.setDatain(topicContent.getIn1());inout.setDataout(topicContent.getOut1());
-            list.add(inout);}
-            if(topicContent.getOut2()!=null){inout.setTpcId(topicContent.getTpcId());inout.setDatain(topicContent.getIn2());inout.setDataout(topicContent.getOut2());
-            list.add(inout);}
-            if(topicContent.getOut3()!=null){inout.setTpcId(topicContent.getTpcId());inout.setDatain(topicContent.getIn3());inout.setDataout(topicContent.getOut3());
-                list.add(inout);}
-            if(topicContent.getOut4()!=null){inout.setTpcId(topicContent.getTpcId());inout.setDatain(topicContent.getIn4());inout.setDataout(topicContent.getOut4());
-                list.add(inout);}
-            if(topicContent.getOut5()!=null){inout.setTpcId(topicContent.getTpcId());inout.setDatain(topicContent.getIn5());inout.setDataout(topicContent.getOut5());
-                list.add(inout);}
+            if(topicContent.getOut1()!=null){
+                Inout inout=new Inout();
+                inout.setTpcId(topicContent.getTpcId());inout.setDatain(topicContent.getIn1());inout.setDataout(topicContent.getOut1());
+                list.add(inout);
+            }
+            if(topicContent.getOut2()!=null){
+                Inout inout=new Inout();
+                inout.setTpcId(topicContent.getTpcId());inout.setDatain(topicContent.getIn2());inout.setDataout(topicContent.getOut2());
+            list.add(inout);
+            }
+            if(topicContent.getOut3()!=null){
+                Inout inout=new Inout();
+                inout.setTpcId(topicContent.getTpcId());inout.setDatain(topicContent.getIn3());inout.setDataout(topicContent.getOut3());
+                list.add(inout);
+            }
+            if(topicContent.getOut4()!=null){
+                Inout inout=new Inout();
+                inout.setTpcId(topicContent.getTpcId());inout.setDatain(topicContent.getIn4());inout.setDataout(topicContent.getOut4());
+                list.add(inout);
+            }
+            if(topicContent.getOut5()!=null){
+                Inout inout=new Inout();
+                inout.setTpcId(topicContent.getTpcId());inout.setDatain(topicContent.getIn5());inout.setDataout(topicContent.getOut5());
+                list.add(inout);
+            }
             inoutService.insertInoutDate(list);
         }else
             out.print("<script language=\"javascript\">alert('添加失败!');window.location.href='/manage/topicadd'</script>");
