@@ -49,6 +49,7 @@ public class TopicServiceImpl implements TopicService {
         int b = Integer.parseInt(lastId.substring(2,6));
         Random random=new Random();
         b=random.nextInt(b);
+        if(b==0) b=1;//random有可能随机到0
         char[] id={'H','C','0','0','0','0'};
         int i=5;
         while(b>0){

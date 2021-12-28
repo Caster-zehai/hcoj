@@ -39,7 +39,7 @@
             var subWeb = window.frames ? window.frames["J_iframe"].document : ifm.contentDocument;
             if(ifm != null && subWeb != null) {
                 ifm.style.height = 'auto';//关键这一句，先取消掉之前iframe设置的高度
-                var height=subWeb.body.scrollHeight+38;
+                var height=subWeb.body.scrollHeight+50;
                 ifm.style.height = height+'px';
             }
         };
@@ -52,12 +52,6 @@
         <div class="box_4">
             <div class="col-md-12 about_left">
                 <h1 class="header_bottom_border" style="font-size: 1.5em;padding-bottom:10px ;">提交记录</h1>
-                <div class="sub_search">
-                    <h4>查找记录</h4>
-                    <input type="text" class="textbox" placeholder="题目编号" style="margin-left: 10px;"/>
-                    <input type="text" class="textbox" placeholder="用户ID" style="margin-left: -5px;"/>
-                    <input type="submit" value="搜索"  style="margin-left: -5px;"/>
-                </div>
                 <iframe id="J_iframe" name="J_iframe" th:src="@{/submissions/list}" frameborder="0" scrolling="no" width="100%" onLoad="iFrameHeight()"></iframe>
             </div>
         </div>

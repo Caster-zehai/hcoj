@@ -53,4 +53,10 @@ public class ContestsController {
         model.addAttribute("lt",lt);
         return "contests/problem";
     }
+
+    @RequestMapping("/submission")
+    public String submission(Model model,int cts_id){
+        model.addAttribute("cts_id",cts_id);
+        return "contests/submission";
+    }
 }

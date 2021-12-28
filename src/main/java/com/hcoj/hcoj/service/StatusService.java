@@ -7,8 +7,11 @@ import com.hcoj.hcoj.domain.Status;
 import java.util.List;
 
 public interface StatusService {
-    //分页获取提交记录列表信息，
+    //分页获取提交记录列表信息，根据不同参赛选择不同的搜索方式
     public IPage<Status> SelectPageStatus(Page<Status> page,Integer cid);
+    public IPage<Status> SelectPageStatus(Page<Status> page,Integer cid,String userId,String tpcId);
+    public IPage<Status> SelectPageStatusBytpc(Page<Status> page,Integer cid,String tpcId);
+    public IPage<Status> SelectPageStatusByuser(Page<Status> page,Integer cid,String userId);
     //添加提交记录
     public void addSub(Status status);
     //根据runId获取信息

@@ -38,18 +38,28 @@ public class SubmissionsController {
     }
 
     @RequestMapping("/list")
-    public String list(Model model,@RequestParam(value = "pn",defaultValue = "1")int pn){
+    public String list(Model model,@RequestParam(value = "pn",defaultValue = "1")int pn,@RequestParam(value = "cts_id",defaultValue = "0")int cts_id,String userId,String tpcId){
         Page<Status> page=new Page<>(pn,20);
-        IPage<Status> iPage=statusService.SelectPageStatus(page,0);
+        IPage<Status> iPage=null;
+        if((userId!=null&&userId!="")&&(tpcId!=null&&tpcId!=""))
+            iPage=statusService.SelectPageStatus(page,cts_id,userId,tpcId);
+        else if((userId!=null&&userId!="")&&(tpcId==null||tpcId==""))
+            iPage=statusService.SelectPageStatusByuser(page,cts_id,userId);
+        else if((userId==null||userId=="")&&(tpcId!=null&&tpcId!=""))
+            iPage=statusService.SelectPageStatusBytpc(page,cts_id,tpcId);
+        else
+            iPage=statusService.SelectPageStatus(page,cts_id);
         if(iPage.getRecords().size()!=0){
             model.addAttribute("iPage",iPage);
         }
         return "submissions/list";
     }
 
+
     @RequestMapping("/subjudge")
-    public String subjudge(Model model,Status status){
+    public String subjudge(Model model,Status status,@RequestParam(value = "cts_id",defaultValue = "0")int cts_id){
         status.setRunId(statusService.getLastRunId());
+        status.setCid(cts_id);
         status.setResult(10);
         status.setTime(0);
         status.setMem(0);

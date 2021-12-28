@@ -35,7 +35,16 @@
     });</script>
 </head>
 <body>
-<div class="topic_list">
+<div class="topic_list" th:if="${iPage==null}">暂无数据</div>
+<div class="topic_list" th:if="${iPage!=null}">
+    <div class="sub_search" th:if="${param.cts_id==null||param.cts_id==''}">
+        <h4>查找记录</h4>
+        <form th:action="@{/submissions/list}">
+            <input type="text" name="tpcId" class="textbox" placeholder="题目编号" style="margin-left: 10px;"/>
+            <input type="text" name="userId" class="textbox" placeholder="用户ID" style="margin-left: -5px;"/>
+            <input type="submit" value="搜索"  style="margin-left: -5px;"/>
+        </form>
+    </div>
     <table>
         <tr class="topic_list_first topic_list_font" style="text-align: center;">
             <td width="20%">提交时间</td>
@@ -72,21 +81,21 @@
                 <span class="total">
 							共 <strong th:text="${iPage.pages}"></strong> 页
 						</span>
-                <div style="display: flex;"><a th:href="@{/contests/list(pn=1)}"><button>|<</button></a>
+                <div style="display: flex;"><a th:href="@{/contests/list(pn=1,cts_id=${param.cts_id})}"><button>|<</button></a>
                     <!--上一页--> <div th:switch="${iPage.current}">
-                        <a th:case="1" th:href="@{/contests/list(pn=1)}"><button><</button></a>
-                        <a th:case="*" th:href="@{/contests/list(pn=${iPage.current-1})}"><button><</button></a>
+                        <a th:case="1" th:href="@{/contests/list(pn=1,cts_id=${param.cts_id})}"><button><</button></a>
+                        <a th:case="*" th:href="@{/contests/list(pn=${iPage.current-1},cts_id=${param.cts_id})}"><button><</button></a>
                     </div>
                     <!--数字序列-->
                     <div th:each="num:${#numbers.sequence(1,iPage.pages)}">
-                        <a th:href="@{/topic/list(pn=${num})}"><button><span class="number">[[${num}]]</span></button></a>
+                        <a th:href="@{/topic/list(pn=${num},cts_id=${param.cts_id})}"><button><span class="number">[[${num}]]</span></button></a>
                     </div>
                     <!--下一页-->
                     <div th:switch="${iPage.current}">
-                        <a th:case="${iPage.pages}" th:href="@{/contests/list(pn=${iPage.pages})}"><button>></button></a>
-                        <a th:case="*" th:href="@{/topic/list(pn=${iPage.current+1})}"><button>></button></a>
+                        <a th:case="${iPage.pages}" th:href="@{/contests/list(pn=${iPage.pages},cts_id=${param.cts_id})}"><button>></button></a>
+                        <a th:case="*" th:href="@{/topic/list(pn=${iPage.current+1},cts_id=${param.cts_id})}"><button>></button></a>
                     </div>
-                    <a th:href="@{/topic/list(pn=${iPage.pages})}"><button>>|</button></a>
+                    <a th:href="@{/topic/list(pn=${iPage.pages},cts_id=${param.cts_id})}"><button>>|</button></a>
                 </div>
             </div>
         </div>

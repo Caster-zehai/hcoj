@@ -84,7 +84,7 @@
 
                 </div>
                 <div class="subform">
-                    <form action="#" th:action="@{/submissions/subjudge}" method="post" id="form" onsubmit="return codesub()">
+                    <form action="#" th:action="@{/submissions/subjudge(cts_id=${param.cts_id})}" method="post" id="form" onsubmit="return codesub()">
                         选择语言：<select id="lang" name="language">
                         <option value="1">C</option>
                         <option value="2">C++</option>

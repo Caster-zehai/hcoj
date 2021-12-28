@@ -24,4 +24,11 @@ public interface StatusMapper extends BaseMapper<Status> {
     List<Status> selectAllNotAdd();
     @Update("update status set isadd=1 where run_id = #{runId}")
     void  updateIsadd(String runId);
+
+    @Select("select s.*,t.tpc_name,r.res_c,r.res_class,l.lang_name from `status` s left join topic t on s.pno=t.tpc_id left join result r on s.result=r.res_id left join languages l on s.`language`=l.lang_id where s.cid=#{cid} and s.username=#{userId} and s.pno=#{tpcId} order by s.submit_date desc")
+    IPage<Status> selectPageVo2(Page<Status> page,Integer cid,String userId,String tpcId);
+    @Select("select s.*,t.tpc_name,r.res_c,r.res_class,l.lang_name from `status` s left join topic t on s.pno=t.tpc_id left join result r on s.result=r.res_id left join languages l on s.`language`=l.lang_id where s.cid=#{cid} and s.username=#{userId} order by s.submit_date desc")
+    IPage<Status> selectPageVoByUser(Page<Status> page,Integer cid,String userId);
+    @Select("select s.*,t.tpc_name,r.res_c,r.res_class,l.lang_name from `status` s left join topic t on s.pno=t.tpc_id left join result r on s.result=r.res_id left join languages l on s.`language`=l.lang_id where s.cid=#{cid} and  s.pno=#{tpcId} order by s.submit_date desc")
+    IPage<Status> selectPageVoByTpc(Page<Status> page,Integer cid,String tpcId);
 }

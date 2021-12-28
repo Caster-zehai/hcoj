@@ -24,6 +24,21 @@ public class StatusServiceImpl implements StatusService {
     }
 
     @Override
+    public IPage<Status> SelectPageStatus(Page<Status> page, Integer cid, String userId, String tpcId) {
+        return statusMapper.selectPageVo2(page,cid,userId,tpcId);
+    }
+
+    @Override
+    public IPage<Status> SelectPageStatusBytpc(Page<Status> page, Integer cid, String tpcId) {
+        return statusMapper.selectPageVoByTpc(page,cid,tpcId);
+    }
+
+    @Override
+    public IPage<Status> SelectPageStatusByuser(Page<Status> page, Integer cid, String userId) {
+        return statusMapper.selectPageVoByUser(page,cid,userId);
+    }
+
+    @Override
     public void addSub(Status status) {
         statusMapper.insert(status);
     }
