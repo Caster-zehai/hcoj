@@ -14,6 +14,7 @@ public class Contests {
     private Integer ctsId;
     private String ctsName;
     private String ctsCreator;
+    private Integer ctsTpcnum;
     private Date enrollBegin;
     private Date enrollEnd;
     private Date ctsBegin;

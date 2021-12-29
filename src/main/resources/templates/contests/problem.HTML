@@ -43,10 +43,15 @@
 </head>
 <body>
 <div th:replace="~{component::header}"></div>
+
 <div class="single_top">
     <div class="container">
         <div class="box_4">
-            <div class="col-md-8 about_left">
+            <div class="col-md-8 about_left" th:if="${#httpServletRequest.getRequestURL().indexOf('contests/ctsran')!=-1}">
+                <h1 class="header_bottom_border" style="font-size: 1.5em;padding-bottom:10px ;">比赛排行榜</h1>
+                <iframe id="J_iframe" name="J_iframe" th:src="@{/contests/ctsrank(cts_id=${param.cts_id})}" frameborder="0" scrolling="no" width="100%" onLoad="iFrameHeight()"></iframe>
+            </div>
+            <div class="col-md-8 about_left" th:if="${#httpServletRequest.getRequestURL().indexOf('contests/problem')!=-1}">
                 <h1 class="header_bottom_border" style="font-size: 1.5em;padding-bottom:10px ;">题目列表</h1>
                 <div class="topic_list" style="background: #F7F7F7">
                     <table>
@@ -58,7 +63,10 @@
                         </tr>
                         <!--题目列表begin-->
                         <tr class="topic_list_sec" th:each="topic,topicStart:${lt}">
-                            <td align="center"><div th:replace="~{topic/topicComponent::nodone}"></div></td>
+                            <td align="center">
+                                <div th:if="${session.USER_SESSION==null ||(session.USER_SESSION!=null && !#strings.containsIgnoreCase(session.USER_SESSION.getUserActopic(),topic.tpcId+','))}" ><div th:replace="~{topic/topicComponent::nodone}"></div></div>
+                                <div th:if="${session.USER_SESSION!=null && #strings.containsIgnoreCase(session.USER_SESSION.getUserActopic(),topic.tpcId+',')}"><div th:replace="~{topic/topicComponent::correct}"></div></div>
+                            </td>
                             <td class="topic_list_font" align="center">
                                 <p th:text="${topicStart.count}"></p>
                             </td>

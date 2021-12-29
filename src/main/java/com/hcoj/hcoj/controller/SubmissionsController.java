@@ -2,10 +2,7 @@ package com.hcoj.hcoj.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hcoj.hcoj.domain.Inout;
-import com.hcoj.hcoj.domain.Status;
-import com.hcoj.hcoj.domain.TopicContent;
-import com.hcoj.hcoj.domain.User;
+import com.hcoj.hcoj.domain.*;
 import com.hcoj.hcoj.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +28,8 @@ public class SubmissionsController {
     private TopicService topicService;
     @Autowired
     private TotalService totalService;
+    @Autowired
+    private ContestsService contestsService;
 
     @RequestMapping("/show")
     public String show(Model model){
@@ -58,8 +57,13 @@ public class SubmissionsController {
 
     @RequestMapping("/subjudge")
     public String subjudge(Model model,Status status,@RequestParam(value = "cts_id",defaultValue = "0")int cts_id){
+        if(cts_id!=0) {
+            Contests contests = contestsService.findContestsById(cts_id);
+            if(contests.getCtsState()==3) status.setCid(cts_id);
+            else status.setCid(0);
+        }else
+            status.setCid(0);
         status.setRunId(statusService.getLastRunId());
-        status.setCid(cts_id);
         status.setResult(10);
         status.setTime(0);
         status.setMem(0);

@@ -37,7 +37,9 @@
             <td style="text-align: center;"><img th:src="@{../images/contest1.png}" width="100px" height="100px"/></td>
             <td>
                 <div class="mess">
-                    <h4><a th:href="@{/contests/overview(cts_id=${contests.ctsId})}" th:text="${contests.ctsName}" target="_parent">2021暑期多校训练营1 </a></h4>
+                    <h4>
+                        <div th:if="${ (contests.ctsState==3 && session.USER_SESSION!=null && !#strings.containsIgnoreCase(contests.ctsUser,session.USER_SESSION.getUserId()+',') ) || contests.ctsState==0 || contests.ctsState==1 || contests.ctsState==2}"><a th:text="${contests.ctsName}" target="_parent"></a></div>
+                        <div th:if="${ (contests.ctsState==3 && session.USER_SESSION!=null && #strings.containsIgnoreCase(contests.ctsUser,session.USER_SESSION.getUserId()+',') ) || contests.ctsState==4}"><a th:href="@{/contests/overview(cts_id=${contests.ctsId})}" th:text="${contests.ctsName}" target="_parent"></a></div></h4>
                     <p th:text="'报名时间：'+${#dates.format(contests.enrollBegin,'yyyy-MM-dd HH:mm:ss')}+' 至 '+${#dates.format(contests.enrollEnd,'yyyy-MM-dd HH:mm:ss')}">报名时间：2021-04-29 10:00 至 2021-07-24 17:00 </p>
                     <p th:text="'比赛时间：'+${#dates.format(contests.ctsBegin,'yyyy-MM-dd HH:mm:ss')}+' 至 '+${#dates.format(contests.ctsEnd,'yyyy-MM-dd HH:mm:ss')}">比赛时间：2021-07-24 12:00 至 2021-07-24 17:00 </p>
                 </div>
@@ -51,6 +53,14 @@
                         <p th:if="${contests.ctsState==3}">比赛中</p>
                         <p th:if="${contests.ctsState==4}">已结束</p>
                     </a>
+                    <div th:if="${contests.ctsState==1}">
+                        <div th:if="${session.USER_SESSION!=null && !#strings.containsIgnoreCase(contests.ctsUser,session.USER_SESSION.getUserId()+',')}">
+                            <a th:href="@{/contests/signup(userId=${session.USER_SESSION.getUserId()},ctsId=${contests.ctsId})}" class="btn btn-primary"><p>报名</p></a>
+                        </div>
+                        <div th:if="${session.USER_SESSION!=null && #strings.containsIgnoreCase(contests.ctsUser,session.USER_SESSION.getUserId()+',')}">
+                            <a href="#" class="btn btn-primary" style="cursor: default;"><p>已报名</p></a>
+                        </div>
+                    </div>
                     <!--<div class="platform-countdown js-countdown">距比赛 3天18:05:13</div>-->
                 </div>
             </td>

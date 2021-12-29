@@ -65,7 +65,7 @@
             <li><a th:href="@{/contests/overview(cts_id=${param.cts_id})}">比赛详情</a></li>
             <li><a th:href="@{/contests/problem(cts_id=${param.cts_id})}">题目</a></li>
             <li><a th:href="@{/contests/submission(cts_id=${param.cts_id})}">提交记录</a></li>
-            <li><a href="#">排行榜</a></li>
+            <li><a th:href="@{/contests/ctsran(cts_id=${param.cts_id})}">排行榜</a></li>
         </ul>
     </div>
 </div>

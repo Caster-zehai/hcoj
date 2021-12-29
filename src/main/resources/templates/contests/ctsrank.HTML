@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>HC Online Judge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="icon" th:href="@{../images/logo.png}" type="image/x-icon">
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link th:href="@{../css/local.css}" rel='stylesheet' type='text/css' />
+    <link th:href="@{../css/bootstrap.css}" rel='stylesheet' type='text/css' />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <link th:href="@{../css/style.css}" rel='stylesheet' type='text/css' />
+    <script th:src="@{../js/simpleCart.min.js}"> </script>
+    <!-- Custom Theme files -->
+    <!--webfont-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" th:src="@{../js/jquery-1.11.1.min.js}"></script>
+    <!-- start menu -->
+    <link th:href="@{../css/megamenu.css}" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" th:src="@{../js/megamenu.js}"></script>
+    <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+</head>
+<body>
+<div class="topic_list">
+    <table>
+        <tr class="topic_list_first topic_list_font" style="text-align: center;">
+            <td width="20%">#</td>
+            <td width="20%">用户</td>
+            <td width="20%">通过数</td>
+            <td width="20%">提交数</td>
+            <td width="20%">总耗时</td>
+        </tr>
+        <!--题目列表begin-->
+        <tr class="topic_list_sec topic_list_font" style="text-align: center;" th:each="ctsrank,ctsrankStart:${iPage.records}">
+            <td th:text="${ctsrankStart.count}"></td>
+            <td th:text="${ctsrank.getUserId()}"></td>
+            <td th:text="${ctsrank.getRanAc()}"></td>
+            <td th:text="${ctsrank.getRanSub()}"></td>
+            <td th:text="${ctsrank.getRanTotal()}"></td>
+        </tr>
+
+        <!--题目列表end-->
+    </table>
+    <div class="topic_bottom float-bottom">
+        <div class="topic_bottom-inner">
+            <div class="page-bar">
+                <span class="total">
+							第 <strong th:text="${iPage.current}"></strong> 页
+                </span>
+                <span class="total">
+							共 <strong th:text="${iPage.pages}"></strong> 页
+						</span>
+                <div style="display: flex;"><a th:href="@{/contests/ctsrank(pn=1,cts_id=${param.cts_id})}"><button>|<</button></a>
+                    <!--上一页--> <div th:switch="${iPage.current}">
+                        <a th:case="1" th:href="@{/contests/ctsrank(pn=1,cts_id=${param.cts_id})}"><button><</button></a>
+                        <a th:case="*" th:href="@{/contests/ctsrank(pn=${iPage.current-1},cts_id=${param.cts_id})}"><button><</button></a>
+                    </div>
+                    <!--数字序列-->
+                    <div th:each="num:${#numbers.sequence(1,iPage.pages)}">
+                        <a th:href="@{/contests/ctsrank(pn=${num},cts_id=${param.cts_id})}"><button><span class="number">[[${num}]]</span></button></a>
+                    </div>
+                    <!--下一页-->
+                    <div th:switch="${iPage.current}">
+                        <a th:case="${iPage.pages}" th:href="@{/contests/ctsrank(pn=${iPage.pages},cts_id=${param.cts_id})}"><button>></button></a>
+                        <a th:case="*" th:href="@{/contests/ctsrank(pn=${iPage.current+1},cts_id=${param.cts_id})}"><button>></button></a>
+                    </div>
+                    <a th:href="@{/contests/ctsrank(pn=${iPage.pages},cts_id=${param.cts_id})}"><button>>|</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

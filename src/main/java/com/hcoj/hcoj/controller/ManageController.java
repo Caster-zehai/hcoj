@@ -313,6 +313,7 @@ public class ManageController {
             //更新比赛绑定题目状态
             Contests contests=contestsService.findContestsById(ctsid);
             contests.setCtsTopic("已绑定");
+            contests.setCtsTpcnum(i);
             contestsService.updateContests(contests);
             out.print("<script language=\"javascript\">alert('绑定成功!');window.location.href='/manage/contestscon'</script>");
         }

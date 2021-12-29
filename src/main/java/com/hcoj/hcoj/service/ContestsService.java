@@ -3,6 +3,7 @@ package com.hcoj.hcoj.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hcoj.hcoj.domain.Contests;
+import com.hcoj.hcoj.domain.Ctsrank;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ import java.util.List;
 public interface ContestsService {
     //分页查找比赛信息
     public IPage<Contests> SelectPageContests(Page<Contests> page);
+    //根据比赛ctsId查询排行榜
+    public IPage<Ctsrank> selectPageCtsrank(Page<Ctsrank> page,Integer ctsId);
     //根据id查找比赛信息
     public Contests findContestsById(int id);
     //查找所有未结束的比赛
