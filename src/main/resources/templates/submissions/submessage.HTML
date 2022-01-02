@@ -65,6 +65,7 @@
                     <p th:text="${'提交时间：'+#dates.format(status.submitDate,'yyyy-MM-dd HH:mm:ss')+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;语言：'+status.langName}"></p>
                     <p th:text="${'运行时间：'+status.time+'MS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占用内存：'+status.mem+'MB'}"></p>
                 </div>
+                    <div th:if=" ${status.cid == 0} ">
                 <div style="width: 50%;float: left;">
                     <h4>测试点</h4>
                     <table width="100%">
@@ -80,7 +81,6 @@
                         </div>
                     </table>
                 </div>
-                </div>
                 <div class="subform" style="width: 80%;background: transparent;margin: 0;padding: 0;" >
                     <p>代码：</p>
                     <div class="ac_content">
@@ -89,6 +89,8 @@
                         </div></div>
                         <textarea id="c2" name="code" th:text="${status.code}" onload="loading()" disabled></textarea>
                     </div>
+                </div>
+                </div>
                 </div>
             </div>
         </div>
