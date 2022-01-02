@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 @Mapper
 public interface ContestsMapper extends BaseMapper<Contests> {
-    @Select("select * from contests order by cts_state")
+    @Select("select * from contests order by cts_state,cts_begin desc")
     IPage<Contests> selectPageVo(Page<Contests> page);
     @Select("select * from contests where cts_state != 4")
     List<Contests> selectAllNoEnd();
