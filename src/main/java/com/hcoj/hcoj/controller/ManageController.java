@@ -342,6 +342,7 @@ public class ManageController {
         contests=changeTime(contests,ctsBegin1,ctsEnd1,enrollBegin1,enrollEnd1);
         //state获取
         contests.setCtsState(getState(contests.getEnrollBegin(),contests.getEnrollEnd(),contests.getCtsBegin(),contests.getCtsEnd()));
+        contests.setCtsTpcnum(0);
         contests.setCtsTopic("未绑定");
         response.setContentType("text/html;charset=gb2312");
         PrintWriter out = response.getWriter();
