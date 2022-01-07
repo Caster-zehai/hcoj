@@ -91,14 +91,14 @@
                     </div>
                     <!--数字序列-->
                     <div th:each="num:${#numbers.sequence(1,iPage.pages)}">
-                        <a th:href="@{/topic/list(pn=${num})}"><button><span class="number">[[${num}]]</span></button></a>
+                        <a th:href="@{/contests/list(pn=${num})}"><button><span class="number">[[${num}]]</span></button></a>
                     </div>
                     <!--下一页-->
                     <div th:switch="${iPage.current}">
                         <a th:case="${iPage.pages}" th:href="@{/contests/list(pn=${iPage.pages})}"><button>></button></a>
-                        <a th:case="*" th:href="@{/topic/list(pn=${iPage.current+1})}"><button>></button></a>
+                        <a th:case="*" th:href="@{/contests/list(pn=${iPage.current+1})}"><button>></button></a>
                     </div>
-                    <a th:href="@{/topic/list(pn=${iPage.pages})}"><button>>|</button></a>
+                    <a th:href="@{/contests/list(pn=${iPage.pages})}"><button>>|</button></a>
                 </div>
             </div>
         </div>

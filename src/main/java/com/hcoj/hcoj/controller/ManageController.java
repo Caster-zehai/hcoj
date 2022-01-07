@@ -344,6 +344,7 @@ public class ManageController {
         contests.setCtsState(getState(contests.getEnrollBegin(),contests.getEnrollEnd(),contests.getCtsBegin(),contests.getCtsEnd()));
         contests.setCtsTpcnum(0);
         contests.setCtsTopic("未绑定");
+        contests.setCtsUser(",");
         response.setContentType("text/html;charset=gb2312");
         PrintWriter out = response.getWriter();
         if(contestsService.addContests(contests)){

@@ -81,21 +81,21 @@
                 <span class="total">
 							共 <strong th:text="${iPage.pages}"></strong> 页
 						</span>
-                <div style="display: flex;"><a th:href="@{/contests/list(pn=1,cts_id=${param.cts_id})}"><button>|<</button></a>
+                <div style="display: flex;"><a th:href="@{/submissions/list(pn=1,cts_id=${param.cts_id})}"><button>|<</button></a>
                     <!--上一页--> <div th:switch="${iPage.current}">
-                        <a th:case="1" th:href="@{/contests/list(pn=1,cts_id=${param.cts_id})}"><button><</button></a>
-                        <a th:case="*" th:href="@{/contests/list(pn=${iPage.current-1},cts_id=${param.cts_id})}"><button><</button></a>
+                        <a th:case="1" th:href="@{/submissions/list(pn=1,cts_id=${param.cts_id})}"><button><</button></a>
+                        <a th:case="*" th:href="@{/submissions/list(pn=${iPage.current-1},cts_id=${param.cts_id})}"><button><</button></a>
                     </div>
                     <!--数字序列-->
                     <div th:each="num:${#numbers.sequence(1,iPage.pages)}">
-                        <a th:href="@{/topic/list(pn=${num},cts_id=${param.cts_id})}"><button><span class="number">[[${num}]]</span></button></a>
+                        <a th:href="@{/submissions/list(pn=${num},cts_id=${param.cts_id})}"><button><span class="number">[[${num}]]</span></button></a>
                     </div>
                     <!--下一页-->
                     <div th:switch="${iPage.current}">
-                        <a th:case="${iPage.pages}" th:href="@{/contests/list(pn=${iPage.pages},cts_id=${param.cts_id})}"><button>></button></a>
-                        <a th:case="*" th:href="@{/topic/list(pn=${iPage.current+1},cts_id=${param.cts_id})}"><button>></button></a>
+                        <a th:case="${iPage.pages}" th:href="@{/submissions/list(pn=${iPage.pages},cts_id=${param.cts_id})}"><button>></button></a>
+                        <a th:case="*" th:href="@{/submissions/list(pn=${iPage.current+1},cts_id=${param.cts_id})}"><button>></button></a>
                     </div>
-                    <a th:href="@{/topic/list(pn=${iPage.pages},cts_id=${param.cts_id})}"><button>>|</button></a>
+                    <a th:href="@{/submissions/list(pn=${iPage.pages},cts_id=${param.cts_id})}"><button>>|</button></a>
                 </div>
             </div>
         </div>

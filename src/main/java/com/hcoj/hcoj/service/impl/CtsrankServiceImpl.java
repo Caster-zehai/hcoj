@@ -27,6 +27,6 @@ public class CtsrankServiceImpl implements CtsrankService {
 
     @Override
     public void updateCtsrank(Ctsrank ctsrank) {
-
+        ctsrankMapper.updateById(ctsrank);
     }
 }

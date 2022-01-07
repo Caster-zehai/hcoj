@@ -98,11 +98,15 @@ public class ContestsController {
         Ctsrank ctsrank=new Ctsrank();
         ctsrank.setUserId(userId);
         ctsrank.setCtsId(ctsId);
+        ctsrank.setRanSub(0);
+        ctsrank.setRanAc(0);
+        ctsrank.setRanTotal(0.0);
         ctsrankService.addCtsrank(ctsrank);
         //比赛用户中添加用户id
         Contests contests=contestsService.findContestsById(ctsId);
         contests.setCtsUser(contests.getCtsUser()+userId+',');
-        out.print("<script language=\"javascript\">alert('报名成功!');window.location.href='/contests/show'</script>");
+        contestsService.updateContests(contests);
+        out.print("<script language=\"javascript\">alert('报名成功!');window.location.href='/contests/list'</script>");
     }
 
 }
